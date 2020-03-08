@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Gold Experience</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string-array name="register_usertype">
+        <item>User Type: Regular</item>
+        <item>User Type: VIP</item>
+    </string-array>
+
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="enter_full_name">Enter Full Name</string>
+    <string name="enter_birthday">Enter Birthday</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="gender">Gender</string>
+    <string name="tnc">I have read the Terms and Conditions</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
 </resources>
