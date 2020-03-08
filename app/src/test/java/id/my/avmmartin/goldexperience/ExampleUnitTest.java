@@ -1,4 +1,4 @@
-package id.my.avmmartin.b2001566840;
+package id.my.avmmartin.goldexperience;
 
 import org.junit.Test;
 
