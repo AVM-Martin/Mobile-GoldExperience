@@ -64,6 +64,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void btn_register_onclick(View view) {
-        //
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
