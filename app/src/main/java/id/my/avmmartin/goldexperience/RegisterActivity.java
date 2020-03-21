@@ -60,10 +60,10 @@ public class RegisterActivity extends ProfileForm {
 
             // TODO: welcome message via SMS
             main_app.register_user(email, profile);
-            main_app.login(email, profile.password);
 
-            Intent intent = new Intent(RegisterActivity.this, PlaceListActivity.class);
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("EMAIL", email);
             startActivity(intent);
         } catch (Exception e) {
             Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();

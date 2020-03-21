@@ -22,6 +22,9 @@ public class LoginActivity extends AppCompatActivity {
 
         init_components();
         set_events();
+
+        String email = getIntent().getStringExtra("EMAIL");
+        et_email.setText(email);
     }
 
     private void init_components() {
