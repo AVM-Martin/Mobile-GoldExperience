@@ -13,8 +13,7 @@ public class RegisterActivity extends ProfileForm {
     private Button btn_login;
     private Button btn_register;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_register);
         super.onCreate(savedInstanceState);
 

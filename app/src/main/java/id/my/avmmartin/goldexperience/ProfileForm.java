@@ -20,8 +20,7 @@ abstract class ProfileForm extends AppCompatActivity {
     private Spinner sp_usertype;
     private View rd_sex;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         init_components();
@@ -29,7 +28,7 @@ abstract class ProfileForm extends AppCompatActivity {
     }
 
     private void init_components() {
-        main_app = (GoldExperience) this.getApplication();
+        main_app = (GoldExperience)this.getApplication();
         et_email = findViewById(R.id.t_profile_et_email);
         et_password = findViewById(R.id.t_profile_et_password);
         et_fullname = findViewById(R.id.t_profile_et_fullname);
@@ -41,8 +40,7 @@ abstract class ProfileForm extends AppCompatActivity {
 
     private void set_events() {
         et_birthday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            @Override public void onClick(View view) {
                 et_birthday_onclick(view);
             }
         });

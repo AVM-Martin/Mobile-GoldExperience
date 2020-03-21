@@ -20,8 +20,7 @@ final class Place {
         latitude = _latitude;
     }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return name;
     }
 }
