@@ -62,7 +62,7 @@ public class RegisterActivity extends ProfileForm {
             main_app.register_user(email, profile);
             main_app.login(email, profile.password);
 
-            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+            Intent intent = new Intent(RegisterActivity.this, PlaceListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         } catch (Exception e) {

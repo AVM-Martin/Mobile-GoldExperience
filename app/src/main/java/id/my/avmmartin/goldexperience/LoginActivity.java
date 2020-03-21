@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         } else if (!((GoldExperience) this.getApplication()).login(email, password)) {
             Toast.makeText(LoginActivity.this, "This account does not match to our data", Toast.LENGTH_SHORT).show();
         } else {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, PlaceListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
