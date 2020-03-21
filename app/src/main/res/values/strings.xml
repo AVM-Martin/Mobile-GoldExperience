@@ -2,6 +2,7 @@
     <string name="app_name">Gold Experience</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_placelist">PlaceListActivity</string>
 
     <string name="female">Female</string>
     <string name="male">Male</string>
@@ -19,4 +20,6 @@
     <string name="tnc">I have read the Terms and Conditions</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+
+    <string name="add_to_my_plan">Add to My Plan</string>
 </resources>
