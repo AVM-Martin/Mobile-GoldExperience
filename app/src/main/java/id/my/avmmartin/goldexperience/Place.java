@@ -19,4 +19,9 @@ final class Place {
         longitude = _longitude;
         latitude = _latitude;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

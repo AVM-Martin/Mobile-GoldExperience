@@ -2,6 +2,7 @@ package id.my.avmmartin.goldexperience;
 
 import android.app.Application;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -67,5 +68,15 @@ final public class GoldExperience extends Application {
 
         register_user(email, profile);
         login(email, profile.password);
+    }
+
+    public Vector<Place> get_places() {
+        // TODO: call the JSON API at https://api.myjson.com/bins/iocic
+        return places;
+    }
+
+    public Place get_place(int id) {
+        // TODO: call the JSON API at https://api.myjson.com/bins/iocic
+        return places.get(id);
     }
 }
