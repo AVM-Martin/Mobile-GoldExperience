@@ -29,13 +29,13 @@ abstract class ProfileForm extends AppCompatActivity {
 
     private void init_components() {
         main_app = (GoldExperience) this.getApplication();
-        et_email = findViewById(R.id.profile_et_email);
-        et_password = findViewById(R.id.profile_et_password);
-        et_fullname = findViewById(R.id.profile_et_fullname);
-        et_birthday = findViewById(R.id.profile_et_birthday);
-        et_phone = findViewById(R.id.profile_et_phone);
-        sp_usertype = findViewById(R.id.profile_sp_usertype);
-        rd_sex = findViewById(R.id.profile_rd_sex);
+        et_email = findViewById(R.id.t_profile_et_email);
+        et_password = findViewById(R.id.t_profile_et_password);
+        et_fullname = findViewById(R.id.t_profile_et_fullname);
+        et_birthday = findViewById(R.id.t_profile_et_birthday);
+        et_phone = findViewById(R.id.t_profile_et_phone);
+        sp_usertype = findViewById(R.id.t_profile_sp_usertype);
+        rd_sex = findViewById(R.id.t_profile_rd_sex);
     }
 
     private void set_events() {
