@@ -13,6 +13,7 @@ final public class GoldExperience extends Application {
     Vector<Place> places = new Vector<>();
 
     public GoldExperience() {
+        // TODO: hard-coded database
         places.add(new Place(
             1, "Potato Head", 4,
             "The best place in Bali",

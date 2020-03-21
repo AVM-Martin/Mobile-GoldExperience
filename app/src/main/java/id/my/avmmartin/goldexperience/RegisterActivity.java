@@ -57,6 +57,7 @@ public class RegisterActivity extends ProfileForm {
                 throw new Exception("Please check the Terms and Condition");
             }
 
+            // TODO: welcome message via SMS
             main_app.register_user(email, profile);
             main_app.login(email, profile.password);
 
