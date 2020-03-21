@@ -9,8 +9,8 @@ final public class GoldExperience extends Application {
     final private String GUEST = "";
 
     private String user = GUEST;
-    HashMap<String, UserProfile> users = new HashMap<>();
-    Vector<Place> places = new Vector<>();
+    private HashMap<String, UserProfile> users = new HashMap<>();
+    private Vector<Place> places = new Vector<>();
 
     public GoldExperience() {
         // TODO: hard-coded database
