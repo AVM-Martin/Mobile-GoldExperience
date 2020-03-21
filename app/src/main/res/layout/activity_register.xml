@@ -57,5 +57,7 @@
             android:layout_marginStart="20sp"
             android:layout_gravity="center"
             android:text="@string/register" />
+
     </LinearLayout>
+
 </RelativeLayout>
