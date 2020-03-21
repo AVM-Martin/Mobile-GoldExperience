@@ -15,10 +15,11 @@ public class RegisterActivity extends ProfileForm {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register);
+        super.onCreate(savedInstanceState);
+
         init_components();
         set_events();
-        super.onCreate(savedInstanceState);
     }
 
     private void init_components() {

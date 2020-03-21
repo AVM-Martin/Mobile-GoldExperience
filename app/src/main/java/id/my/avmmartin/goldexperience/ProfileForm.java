@@ -22,9 +22,10 @@ abstract class ProfileForm extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         init_components();
         set_events();
-        super.onCreate(savedInstanceState);
     }
 
     private void init_components() {
