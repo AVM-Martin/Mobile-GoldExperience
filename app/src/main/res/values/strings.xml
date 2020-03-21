@@ -5,7 +5,7 @@
 
     <string name="female">Female</string>
     <string name="male">Male</string>
-    <string-array name="register_usertype">
+    <string-array name="profile_usertype">
         <item>User Type: Regular</item>
         <item>User Type: VIP</item>
     </string-array>

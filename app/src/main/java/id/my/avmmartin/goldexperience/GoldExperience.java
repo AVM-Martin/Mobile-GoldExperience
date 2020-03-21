@@ -2,7 +2,6 @@ package id.my.avmmartin.goldexperience;
 
 import android.app.Application;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -45,15 +44,27 @@ final public class GoldExperience extends Application {
         user = GUEST;
     }
 
-    String getUser() {
+    String get_user() {
         return user;
     }
 
-    UserProfile getProfile() {
+    UserProfile get_profile() {
         return users.get(user);
     }
 
-    public void register_or_update(String email, UserProfile new_user) {
-        users.put(email, new_user);
+    public void register_user(String email, UserProfile profile) {
+        users.put(email, profile);
+    }
+
+    private void unregister_user(String email) {
+        users.remove(email);
+    }
+
+    public void update_user(String email, UserProfile profile) {
+        logout();
+        unregister_user(get_user());
+
+        register_user(email, profile);
+        login(email, profile.password);
     }
 }
