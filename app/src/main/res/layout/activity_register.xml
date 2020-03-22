@@ -7,6 +7,7 @@
     tools:context=".RegisterActivity" >
 
     <RelativeLayout
+        android:id="@+id/register_container_relative"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -41,6 +42,7 @@
             android:text="@string/tnc" />
 
         <LinearLayout
+            android:id="@+id/register_container_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/register_cb_tnc"
