@@ -17,23 +17,34 @@
         android:textSize="40sp"
         android:gravity="center" />
 
-    <TextView
-        android:id="@+id/placedetail_tv_rating"
+    <LinearLayout
+        android:id="@+id/placedetail_container_rating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/placedetail_tv_name"
         android:layout_marginTop="10sp"
-        android:text="Rating" />
+        android:gravity="center" >
+
+        <RatingBar
+            android:id="@+id/placedetail_rb_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/placedetail_tv_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/placedetail_tv_rating"
+        android:layout_below="@id/placedetail_container_rating"
         android:layout_marginTop="10sp"
         android:text="Place Description" />
 
+    <!-- TODO: GMaps API with simple mark the location-->
+
     <LinearLayout
+        android:id="@+id/placedetail_container_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/placedetail_tv_description"
