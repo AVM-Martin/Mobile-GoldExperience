@@ -79,10 +79,10 @@ abstract class ProfileForm extends AppCompatActivity {
         String email = get_email();
         String password = et_password.getText().toString();
         String fullname = et_fullname.getText().toString();
-        // birthday
+        Date birthday = new Date();
         String phone = et_phone.getText().toString();
-        // usertype
-        // sex
+        boolean usertype = true;
+        boolean sex = false;
 
         if (password.equals("")) {
             throw new Exception("Password must be filled");
@@ -101,9 +101,7 @@ abstract class ProfileForm extends AppCompatActivity {
         } else if (false) {
             throw new Exception("Please fill in your gender");
         } else {
-            return new UserProfile(
-                -1, email, password, fullname, new Date(), phone, false, false
-            );
+            return new UserProfile(-1, email, password, fullname, birthday, phone, usertype, sex);
         }
     }
 }

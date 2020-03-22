@@ -48,6 +48,10 @@ final public class GoldExperience extends Application {
         user_id = GUEST;
     }
 
+    public int get_user_id() {
+        return user_id;
+    }
+
     UserProfile get_profile() {
         return users.get(user_id);
     }
