@@ -51,14 +51,14 @@ public class RegisterActivity extends ProfileForm {
 
         try {
             String email = super.get_email();
-            UserProfile profile = super.get_profile();
+            UserProfile user = super.get_user_profile();
 
             if (!tnc) {
                 throw new Exception("Please check the Terms and Condition");
             }
 
             // TODO: welcome message via SMS
-            main_app.register_user(email, profile);
+            main_app.register_user(user);
 
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

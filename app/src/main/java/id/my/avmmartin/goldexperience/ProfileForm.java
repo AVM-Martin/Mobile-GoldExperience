@@ -47,6 +47,7 @@ abstract class ProfileForm extends AppCompatActivity {
     }
 
     private void et_birthday_onclick(View view) {
+        // TODO QUIZ: date picker dialog
         // final Calendar c = Calendar.getInstance();
         // DatePickerDialog datePickerDialog = new DatePickerDialog(
         //     this,
@@ -73,7 +74,9 @@ abstract class ProfileForm extends AppCompatActivity {
         }
     }
 
-    protected UserProfile get_profile() throws Exception {
+    protected UserProfile get_user_profile() throws Exception {
+        // TODO QUIZ: get data
+        String email = get_email();
         String password = et_password.getText().toString();
         String fullname = et_fullname.getText().toString();
         // birthday
@@ -99,7 +102,7 @@ abstract class ProfileForm extends AppCompatActivity {
             throw new Exception("Please fill in your gender");
         } else {
             return new UserProfile(
-                password, fullname, new Date(), phone, false, false
+                email, password, fullname, new Date(), phone, false, false
             );
         }
     }
