@@ -10,11 +10,18 @@ final public class GoldExperience extends Application {
     private int user_id = GUEST;
     private Vector<UserProfile> users = new Vector<>();
     private Vector<Place> places = new Vector<>();
+    private Vector<Plan> plans = new Vector<>();
 
     public GoldExperience() {
         // TODO: hard-coded database
-        places.add(new Place("Potato Head", 4, "The best place in Bali", -6.2000809, 106.7833355));
-        places.add(new Place("Pink Beach", 5, "The best place in Lombok", -6.2261741, 106.9078293));
+        places.add(new Place(
+            places.size(), "Potato Head", 4,
+            "The best place in Bali", -6.2000809, 106.7833355
+        ));
+        places.add(new Place(
+            places.size(), "Pink Beach", 5,
+            "The best place in Lombok", -6.2261741, 106.9078293)
+        );
     }
 
     boolean login(String email, String password) {
@@ -47,6 +54,7 @@ final public class GoldExperience extends Application {
 
     public void register_user(UserProfile user) {
         // TODO QUIZ: validate duplicate email
+        user.id = users.size();
         users.add(user);
     }
 
@@ -62,5 +70,22 @@ final public class GoldExperience extends Application {
     public Place get_place(int id) {
         // TODO: call the JSON API at https://api.myjson.com/bins/iocic
         return places.get(id);
+    }
+
+    public void add_new_plan(Plan plan) {
+        plan.id = plans.size();
+        plans.add(plan);
+    }
+
+    public Vector<Plan> get_user_plans() {
+        Vector<Plan> result = new Vector<>();
+
+        for (Plan plan: plans) {
+            if (plan.fk_userid == user_id) {
+                result.add(plan);
+            }
+        }
+
+        return result;
     }
 }

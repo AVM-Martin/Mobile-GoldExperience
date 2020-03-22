@@ -3,6 +3,7 @@ package id.my.avmmartin.goldexperience;
 import java.util.Date;
 
 final class UserProfile {
+    int id;
     String email;
     String password;
     String fullname;
@@ -12,9 +13,10 @@ final class UserProfile {
     boolean sex_male;
 
     public UserProfile(
-        String _email, String _password, String _fullname, Date _birthday,
-        String _phone, boolean _usertype_vip, boolean _sex_male
+        int _id, String _email, String _password, String _fullname,
+        Date _birthday, String _phone, boolean _usertype_vip, boolean _sex_male
     ) {
+        id = _id;
         email = _email;
         password = _password;
         fullname = _fullname;

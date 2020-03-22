@@ -102,7 +102,7 @@ abstract class ProfileForm extends AppCompatActivity {
             throw new Exception("Please fill in your gender");
         } else {
             return new UserProfile(
-                email, password, fullname, new Date(), phone, false, false
+                -1, email, password, fullname, new Date(), phone, false, false
             );
         }
     }
