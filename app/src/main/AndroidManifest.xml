@@ -14,12 +14,10 @@
 
         <activity
             android:name=".RegisterActivity"
-            android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
@@ -36,8 +34,11 @@
 
         <activity
             android:name=".PlaceDetailActivity"
-            android:label="@string/title_activity_placelist"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".PlanListActivity"
+            android:theme="@style/AppTheme" />
 
     </application>
 
