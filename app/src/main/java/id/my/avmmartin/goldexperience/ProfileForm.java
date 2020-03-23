@@ -84,25 +84,25 @@ abstract class ProfileForm extends AppCompatActivity {
 
 
         if (email.equals("")) {
-            throw new Exception(String.valueOf(R.string.warning_email_filled));
+            throw new Exception(getString(R.string.warning_email_filled));
         } else if (!Helper.is_valid_email(email)) {
-            throw new Exception(String.valueOf(R.string.warning_email_invalid));
+            throw new Exception(getString(R.string.warning_email_invalid));
         } else if (password.equals("")) {
-            throw new Exception(String.valueOf(R.string.warning_password_filled));
+            throw new Exception(getString(R.string.warning_password_filled));
         } else if (!Helper.is_valid_password(password)) {
-            throw new Exception(String.valueOf(R.string.warning_password_invalid));
+            throw new Exception(getString(R.string.warning_password_invalid));
         } else if (fullname.equals("")) {
-            throw new Exception(String.valueOf(R.string.warning_full_name_filled));
+            throw new Exception(getString(R.string.warning_full_name_filled));
         } else if (false) {
-            throw new Exception(String.valueOf(R.string.warning_birthday_filled));
+            throw new Exception(getString(R.string.warning_birthday_filled));
         } else if (phone.equals("")) {
-            throw new Exception(String.valueOf(R.string.warning_phone_number_filled));
+            throw new Exception(getString(R.string.warning_phone_number_filled));
         } else if (!Helper.is_valid_phone_number(phone)) {
-            throw new Exception(String.valueOf(R.string.warning_phone_number_invalid));
+            throw new Exception(getString(R.string.warning_phone_number_invalid));
         } else if (false) {
-            throw new Exception(String.valueOf(R.string.warning_user_type_filled));
+            throw new Exception(getString(R.string.warning_user_type_filled));
         } else if (false) {
-            throw new Exception(String.valueOf(R.string.warning_gender_filled));
+            throw new Exception(getString(R.string.warning_gender_filled));
         } else {
             return new UserProfile(-1, email, password, fullname, birthday, phone, usertype, sex);
         }
