@@ -20,7 +20,7 @@ public class PlanListActivity extends AppCompatActivity {
 
         load_data();
 
-        getSupportActionBar().setTitle("Plan List");
+        getSupportActionBar().setTitle(R.string.title_plan_list);
     }
 
     private void init_components() {

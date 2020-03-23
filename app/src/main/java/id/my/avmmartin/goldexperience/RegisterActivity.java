@@ -54,7 +54,7 @@ public class RegisterActivity extends ProfileForm {
             UserProfile user = super.get_user_profile();
 
             if (!tnc) {
-                throw new Exception("Please check the Terms and Condition");
+                throw new Exception(String.valueOf(R.string.warning_tnc_checked));
             }
 
             // TODO: welcome message via SMS
@@ -62,7 +62,7 @@ public class RegisterActivity extends ProfileForm {
 
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.putExtra("EMAIL", email);
+            intent.putExtra(GoldExperience.INTENT_EMAIL, email);
             startActivity(intent);
         } catch (Exception e) {
             Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();

@@ -1,12 +1,9 @@
 <resources>
     <string name="app_name">Gold Experience</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_register">RegisterActivity</string>
-    <string name="title_activity_placelist">PlaceListActivity</string>
 
     <string name="female">Female</string>
     <string name="male">Male</string>
-    <string-array name="profile_usertype">
+    <string-array name="profile_user_type">
         <item>User Type: Regular</item>
         <item>User Type: VIP</item>
     </string-array>
@@ -16,14 +13,35 @@
     <string name="enter_full_name">Enter Full Name</string>
     <string name="enter_birthday">Enter Birthday</string>
     <string name="enter_phone_number">Enter Phone Number</string>
-    <string name="gender">Gender</string>
-    <string name="tnc">I have read the Terms and Conditions</string>
-    <string name="login">Login</string>
-    <string name="register">Register</string>
-
-    <string name="add_to_my_plan">Add to My Plan</string>
+    <string name="enter_gender">Gender</string>
     <string name="enter_plan_name">Enter Plan Name</string>
     <string name="enter_plan_date">Enter Plan Date</string>
     <string name="enter_plan_time">Enter Plan Time</string>
     <string name="enter_plan_note">Enter Plan Note</string>
+    <string name="tnc">I have read the Terms and Conditions</string>
+
+    <string name="warning_email_filled">Email must be filled</string>
+    <string name="warning_email_invalid">Email format is invalid</string>
+    <string name="warning_password_filled">Password must be filled</string>
+    <string name="warning_password_invalid">Password format is invalid</string>
+    <string name="warning_full_name_filled">Full name must be filled</string>
+    <string name="warning_birthday_filled">Birthday must be filled</string>
+    <string name="warning_phone_number_filled">Phone number must be filled</string>
+    <string name="warning_phone_number_invalid">Phone number format is invalid</string>
+    <string name="warning_user_type_filled">Please select your user type</string>
+    <string name="warning_gender_filled">Please select your gender</string>
+    <string name="warning_tnc_checked">Please check the Terms and Condition</string>
+    <string name="warning_not_match_account">This account does not match to our data</string>
+
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="submit">Submit</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="add_to_my_plan">Add to My Plan</string>
+    <string name="title_place_list">Place List</string>
+    <string name="title_plan_list">Plan List</string>
+    <string name="title_my_plan">My Plan</string>
+    <string name="title_profile">Profile</string>
 </resources>

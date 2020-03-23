@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
         init_components();
         set_events();
 
-        String email = getIntent().getStringExtra("EMAIL");
+        String email = getIntent().getStringExtra(GoldExperience.INTENT_EMAIL);
         et_email.setText(email);
     }
 
@@ -51,11 +51,11 @@ public class LoginActivity extends AppCompatActivity {
         String password = et_password.getText().toString();
 
         if (email.equals("")) {
-            Toast.makeText(LoginActivity.this, "Email must be filled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, R.string.warning_email_filled, Toast.LENGTH_SHORT).show();
         } else if (password.equals("")) {
-            Toast.makeText(LoginActivity.this, "Password must be filled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, R.string.warning_password_filled, Toast.LENGTH_SHORT).show();
         } else if (!((GoldExperience) this.getApplication()).login(email, password)) {
-            Toast.makeText(LoginActivity.this, "This account does not match to our data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, R.string.warning_not_match_account, Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(LoginActivity.this, PlaceListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

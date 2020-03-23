@@ -5,6 +5,9 @@ import android.app.Application;
 import java.util.Vector;
 
 final public class GoldExperience extends Application {
+    final static String INTENT_EMAIL = "id.my.avmmartin.goldexperience.EMAIL";
+    final static String INTENT_PLACE_ID = "id.my.avmmartin.goldexperience.PLACE_ID";
+
     final private int GUEST = -1;
 
     private int user_id = GUEST;
