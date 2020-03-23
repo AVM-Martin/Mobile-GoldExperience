@@ -50,7 +50,6 @@ public class RegisterActivity extends ProfileForm {
         boolean tnc = cb_tnc.isChecked();
 
         try {
-            String email = super.get_email();
             UserProfile user = super.get_user_profile();
 
             if (!tnc) {
@@ -62,7 +61,7 @@ public class RegisterActivity extends ProfileForm {
 
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.putExtra(GoldExperience.INTENT_EMAIL, email);
+            intent.putExtra(GoldExperience.INTENT_EMAIL, user.email);
             startActivity(intent);
         } catch (Exception e) {
             Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();

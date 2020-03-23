@@ -46,6 +46,16 @@ abstract class ProfileForm extends AppCompatActivity {
         });
     }
 
+    protected void load_data(UserProfile user) {
+        et_email.setText(user.email);
+        et_password.setText(user.password);
+        et_fullname.setText(user.fullname);
+        // et_birthday = findViewById(R.id.t_profile_et_birthday);
+        et_phone.setText(user.phone);
+        // sp_usertype = findViewById(R.id.t_profile_sp_usertype);
+        // rd_sex = findViewById(R.id.t_profile_rd_sex);
+    }
+
     private void et_birthday_onclick(View view) {
         // TODO QUIZ: date picker dialog
         // final Calendar c = Calendar.getInstance();
@@ -62,21 +72,9 @@ abstract class ProfileForm extends AppCompatActivity {
         // datePickerDialog.show();
     }
 
-    protected String get_email() throws Exception {
-        String email = et_email.getText().toString();
-
-        if (email.equals("")) {
-            throw new Exception(String.valueOf(R.string.warning_email_filled));
-        } else if (!Helper.is_valid_email(email)) {
-            throw new Exception(String.valueOf(R.string.warning_email_invalid));
-        } else {
-            return email;
-        }
-    }
-
     protected UserProfile get_user_profile() throws Exception {
         // TODO QUIZ: get data
-        String email = get_email();
+        String email = et_email.getText().toString();
         String password = et_password.getText().toString();
         String fullname = et_fullname.getText().toString();
         Date birthday = new Date();
@@ -84,7 +82,12 @@ abstract class ProfileForm extends AppCompatActivity {
         boolean usertype = true;
         boolean sex = false;
 
-        if (password.equals("")) {
+
+        if (email.equals("")) {
+            throw new Exception(String.valueOf(R.string.warning_email_filled));
+        } else if (!Helper.is_valid_email(email)) {
+            throw new Exception(String.valueOf(R.string.warning_email_invalid));
+        } else if (password.equals("")) {
             throw new Exception(String.valueOf(R.string.warning_password_filled));
         } else if (!Helper.is_valid_password(password)) {
             throw new Exception(String.valueOf(R.string.warning_password_invalid));
