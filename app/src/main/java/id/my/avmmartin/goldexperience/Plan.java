@@ -21,4 +21,8 @@ final class Plan {
         time = _time;
         note = _note;
     }
+
+    @Override public String toString() {
+        return name + "\n" + note;
+    }
 }
