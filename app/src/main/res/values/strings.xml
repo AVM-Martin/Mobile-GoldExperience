@@ -22,6 +22,7 @@
 
     <string name="warning_email_filled">Email must be filled</string>
     <string name="warning_email_invalid">Email format is invalid</string>
+    <string name="warning_email_duplicate">This email has been registered</string>
     <string name="warning_password_filled">Password must be filled</string>
     <string name="warning_password_invalid">Password format is invalid</string>
     <string name="warning_full_name_filled">Full name must be filled</string>
@@ -33,7 +34,6 @@
     <string name="warning_tnc_checked">Please check the Terms and Condition</string>
     <string name="warning_not_match_account">This account does not match to our data</string>
 
-    <string name="success_login"></string>
     <string name="success_update">Profile updated</string>
 
     <string name="login">Login</string>

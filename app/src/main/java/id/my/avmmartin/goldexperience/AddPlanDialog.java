@@ -24,7 +24,7 @@ final class AddPlanDialog extends DialogFragment {
     TextView et_time;
     TextView et_note;
 
-    @Override public void onAttach(Context context) {
+    @Override public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
         try {
@@ -44,6 +44,17 @@ final class AddPlanDialog extends DialogFragment {
         et_time = view.findViewById(R.id.addplan_et_time);
         et_note = view.findViewById(R.id.addplan_et_note);
 
+        et_date.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) {
+                et_date_onclick(view);
+            }
+        });
+        et_time.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) {
+                et_time_onclick(view);
+            }
+        });
+
         builder
             .setView(view)
             .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -58,5 +69,13 @@ final class AddPlanDialog extends DialogFragment {
             });
 
         return builder.create();
+    }
+
+    private void et_date_onclick(View view) {
+        // TODO QUIZ: date picker dialog
+    }
+
+    private void et_time_onclick(View view) {
+        // TODO QUIZ: time picker dialog
     }
 }
