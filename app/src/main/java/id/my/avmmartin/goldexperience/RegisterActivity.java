@@ -53,7 +53,7 @@ public class RegisterActivity extends ProfileForm {
             UserProfile user = super.get_user_profile();
 
             if (!tnc) {
-                throw new Exception(String.valueOf(R.string.warning_tnc_checked));
+                throw new Exception(getString(R.string.warning_tnc_checked));
             }
 
             // TODO: welcome message via SMS
