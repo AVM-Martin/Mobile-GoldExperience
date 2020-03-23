@@ -33,8 +33,13 @@
     <string name="warning_tnc_checked">Please check the Terms and Condition</string>
     <string name="warning_not_match_account">This account does not match to our data</string>
 
+    <string name="success_login"></string>
+    <string name="success_update">Profile updated</string>
+
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="update">Update</string>
+    <string name="logout">Logout</string>
     <string name="submit">Submit</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>

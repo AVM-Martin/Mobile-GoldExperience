@@ -40,6 +40,10 @@
             android:name=".PlanListActivity"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".ProfileActivity"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>
