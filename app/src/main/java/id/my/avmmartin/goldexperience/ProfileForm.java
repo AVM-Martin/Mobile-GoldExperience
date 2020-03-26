@@ -58,7 +58,7 @@ abstract class ProfileForm extends AppCompatActivity {
         et_fullname.setText(user.fullname);
         et_birthday.setText(Helper.to_date_format(user.birthday));
         et_phone.setText(user.phone);
-        // sp_usertype = findViewById(R.id.t_profile_sp_usertype);
+        sp_usertype.setSelection(user.usertype_vip ? 1 : 0);
         // rd_sex = findViewById(R.id.t_profile_rd_sex);
         calendar.setTime(user.birthday);
     }
@@ -88,7 +88,7 @@ abstract class ProfileForm extends AppCompatActivity {
         String fullname = et_fullname.getText().toString();
         Date birthday = calendar.getTime();
         String phone = et_phone.getText().toString();
-        boolean usertype = true;
+        boolean usertype_vip = sp_usertype.getSelectedItem().toString().contains("VIP");
         boolean sex = false;
 
         if (email.equals("")) {
@@ -108,11 +108,9 @@ abstract class ProfileForm extends AppCompatActivity {
         } else if (!Helper.is_valid_phone_number(phone)) {
             throw new Exception(getString(R.string.warning_phone_number_invalid));
         } else if (false) {
-            throw new Exception(getString(R.string.warning_user_type_filled));
-        } else if (false) {
             throw new Exception(getString(R.string.warning_gender_filled));
         } else {
-            return new UserProfile(-1, email, password, fullname, birthday, phone, usertype, sex);
+            return new UserProfile(-1, email, password, fullname, birthday, phone, usertype_vip, sex);
         }
     }
 }
