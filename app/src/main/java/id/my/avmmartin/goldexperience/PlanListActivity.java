@@ -41,5 +41,6 @@ public class PlanListActivity extends AppCompatActivity implements DeletePlanDia
 
     @Override public void deleteplandialog_btn_submit_onclick(DeletePlanDialog dialog) {
         main_app.delete_plan(dialog.plan.id);
+        load_data();
     }
 }
