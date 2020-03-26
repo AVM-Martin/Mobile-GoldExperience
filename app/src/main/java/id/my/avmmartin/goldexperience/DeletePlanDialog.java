@@ -35,18 +35,17 @@ class DeletePlanDialog extends DialogFragment {
     @NonNull @Override public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-        builder
-            .setMessage(getString(R.string.delete) + " " + plan.name + "?")
-            .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                @Override public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            })
-            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                @Override public void onClick(DialogInterface dialog, int which) {
-                    listener.deleteplandialog_btn_submit_onclick(DeletePlanDialog.this);
-                }
-            });
+        builder.setMessage(getString(R.string.delete) + " " + plan.name + "?");
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialog, int which) {
+                listener.deleteplandialog_btn_submit_onclick(DeletePlanDialog.this);
+            }
+        });
 
         return builder.create();
     }

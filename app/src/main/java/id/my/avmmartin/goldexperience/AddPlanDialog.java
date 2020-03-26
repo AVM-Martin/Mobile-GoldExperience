@@ -63,18 +63,17 @@ final class AddPlanDialog extends DialogFragment {
             }
         });
 
-        builder
-            .setView(view)
-            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                @Override public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            })
-            .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
-                @Override public void onClick(DialogInterface dialog, int which) {
-                    listener.addplandialog_btn_submit_onclick(AddPlanDialog.this);
-                }
-            });
+        builder.setView(view);
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialog, int which) {
+                listener.addplandialog_btn_submit_onclick(AddPlanDialog.this);
+            }
+        });
 
         return builder.create();
     }
