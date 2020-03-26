@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20sp">
+    android:padding="20sp" >
 
     <Button
         android:id="@+id/adapter_planlist_btn_delete"
@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/colorAccent"
         android:onClick="planlistadapter_btn_delete_onclick"
         android:text="@string/delete" />
 

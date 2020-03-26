@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/register_container_relative"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_vertical"
         android:padding="30sp"
@@ -20,10 +20,10 @@
             android:id="@+id/register_tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="40sp"
             android:layout_marginBottom="10sp"
             android:paddingBottom="50sp"
+            android:text="@string/app_name"
+            android:textSize="40sp"
             android:gravity="center" />
 
         <include

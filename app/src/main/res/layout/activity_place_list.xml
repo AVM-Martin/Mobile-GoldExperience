@@ -6,17 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".PlaceListActivity">
+    tools:context=".PlaceListActivity" >
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/placelist_bottomnav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:background="@color/colorPrimary"
         android:layout_alignParentBottom="true"
-        app:itemIconTint="#FFFFFF"
-        app:itemTextColor="#FFFFFF"
+        android:padding="10sp"
+        android:background="@color/gold"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
         app:menu="@menu/bottom_navigation" />
 
     <ListView

@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10sp"
-            android:text="@string/enter_gender"/>
+            android:text="@string/enter_gender" />
 
         <RadioButton
             android:id="@+id/t_profile_rd_sex_male"
@@ -78,14 +78,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
             android:layout_marginRight="10sp"
-            android:text="@string/male"  />
+            android:text="@string/male" />
 
         <RadioButton
             android:id="@+id/t_profile_rd_sex_female"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10sp"
-            android:text="@string/female"  />
+            android:text="@string/female" />
 
     </RadioGroup>
 

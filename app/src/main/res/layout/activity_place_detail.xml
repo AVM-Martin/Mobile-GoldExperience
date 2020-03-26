@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_vertical"
     android:padding="30sp"
-    tools:context=".PlaceDetailActivity">
+    tools:context=".PlaceDetailActivity" >
 
     <TextView
         android:id="@+id/placedetail_tv_name"
@@ -29,6 +28,7 @@
             android:id="@+id/placedetail_rb_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:progressTint="@color/gold"
             android:isIndicator="true" />
 
     </LinearLayout>
@@ -47,7 +47,7 @@
         android:id="@+id/placedetail_container_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/placedetail_tv_description"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="50sp"
         android:gravity="center" >
 
