@@ -39,7 +39,7 @@ class PlanListAdapter extends ArrayAdapter<Plan> {
         btn_delete.setTag(plan);
 
         if (plan.date.before(new Date())) {
-            view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightred));
+            view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.light_red));
         }
 
         return view;
