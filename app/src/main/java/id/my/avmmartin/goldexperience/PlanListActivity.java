@@ -3,7 +3,7 @@ package id.my.avmmartin.goldexperience;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.view.View;
 import android.widget.ListView;
 
 public class PlanListActivity extends AppCompatActivity {
@@ -15,10 +15,13 @@ public class PlanListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         init_components();
+        getSupportActionBar().setTitle(R.string.title_plan_list);
+    }
+
+    @Override protected void onStart() {
+        super.onStart();
 
         load_data();
-
-        getSupportActionBar().setTitle(R.string.title_plan_list);
     }
 
     private void init_components() {
@@ -27,18 +30,11 @@ public class PlanListActivity extends AppCompatActivity {
     }
 
     private void load_data() {
-        lv_plandata.setAdapter(new ArrayAdapter<>(
-            this, android.R.layout.simple_list_item_1, main_app.get_user_plans()
-        ));
-        // TODO QUIZ: conditional background color
-        // TODO QUIZ: delete data
-//        lv_plandata.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(PlanListActivity.this, PlaceDetailActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                intent.putExtra("PLACE_ID", id);
-//                startActivity(intent);
-//            }
-//        });
+        lv_plandata.setAdapter(new PlanListAdapter(this, main_app.get_user_plans()));
+    }
+
+    public void removePayOnClickHandler(View view) {
+        Plan plan = (Plan)view.getTag();
+        // TODO QUIZ: delete it from database
     }
 }
