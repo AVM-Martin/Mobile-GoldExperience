@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -67,9 +66,11 @@ public class PlaceListActivity extends AppCompatActivity {
         lv_placedata.setAdapter(new PlaceListAdapter(this, main_app.get_places()));
         lv_placedata.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Place place = (Place)parent.getItemAtPosition(position);
+
                 Intent intent = new Intent(PlaceListActivity.this, PlaceDetailActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra(GoldExperience.INTENT_PLACE_ID, id);
+                intent.putExtra(GoldExperience.INTENT_PLACE_ID, place.id);
                 startActivity(intent);
             }
         });

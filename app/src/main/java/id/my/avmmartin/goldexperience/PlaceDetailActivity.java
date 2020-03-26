@@ -33,7 +33,7 @@ public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDia
         rb_rating = findViewById(R.id.placedetail_rb_rating);
         tv_description = findViewById(R.id.placedetail_tv_description);
         btn_addplace = findViewById(R.id.placedetail_btn_addplace);
-        place = main_app.get_place((int)getIntent().getLongExtra(GoldExperience.INTENT_PLACE_ID, -1));
+        place = main_app.get_place(getIntent().getIntExtra(GoldExperience.INTENT_PLACE_ID, -1));
     }
 
     private void set_contents() {
