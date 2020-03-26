@@ -37,6 +37,7 @@
         android:layout_below="@id/t_profile_et_fullname"
         android:layout_marginTop="10sp"
         android:inputType="date"
+        android:focusable="false"
         android:hint="@string/enter_birthday" />
 
     <EditText

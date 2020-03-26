@@ -23,6 +23,6 @@ final class Plan {
     }
 
     @Override public String toString() {
-        return name + "\n" + note;
+        return name + "\n" + Helper.to_date_format(date) + " " + Helper.to_time_format(time) + "\n" + note;
     }
 }

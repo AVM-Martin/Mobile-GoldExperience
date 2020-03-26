@@ -1,13 +1,16 @@
 package id.my.avmmartin.goldexperience;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.Calendar;
 import java.util.Date;
 
 abstract class ProfileForm extends AppCompatActivity {
@@ -19,6 +22,7 @@ abstract class ProfileForm extends AppCompatActivity {
     private EditText et_phone;
     private Spinner sp_usertype;
     private View rd_sex;
+    private Calendar calendar;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,7 @@ abstract class ProfileForm extends AppCompatActivity {
         et_phone = findViewById(R.id.t_profile_et_phone);
         sp_usertype = findViewById(R.id.t_profile_sp_usertype);
         rd_sex = findViewById(R.id.t_profile_rd_sex);
+        calendar = Calendar.getInstance();
     }
 
     private void set_events() {
@@ -51,26 +56,29 @@ abstract class ProfileForm extends AppCompatActivity {
         et_email.setText(user.email);
         et_password.setText(user.password);
         et_fullname.setText(user.fullname);
-        // et_birthday = findViewById(R.id.t_profile_et_birthday);
+        et_birthday.setText(Helper.to_date_format(user.birthday));
         et_phone.setText(user.phone);
         // sp_usertype = findViewById(R.id.t_profile_sp_usertype);
         // rd_sex = findViewById(R.id.t_profile_rd_sex);
+        calendar.setTime(user.birthday);
     }
 
     private void et_birthday_onclick(View view) {
-        // TODO QUIZ: date picker dialog
-        // final Calendar c = Calendar.getInstance();
-        // DatePickerDialog datePickerDialog = new DatePickerDialog(
-        //     this,
-        //     new DatePickerDialog.OnDateSetListener() {
-        //         @Override
-        //         public void onDateSet(DatePicker view, int year, int month, int day) {
-        //             et_birthday.setText(day + "-" + month + "-" + year);
-        //         }
-        //     },
-        //     c.get(c.YEAR), c.get(c.MONTH), c.get(c.DAY_OF_MONTH)
-        // );
-        // datePickerDialog.show();
+        DatePickerDialog date_picker_dialog = new DatePickerDialog(
+            this,
+            new DatePickerDialog.OnDateSetListener() {
+                @Override public void onDateSet(DatePicker view, int year, int month, int day) {
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, month);
+                    calendar.set(Calendar.DAY_OF_MONTH, day);
+                    et_birthday.setText(Helper.to_date_format(calendar.getTime()));
+                }
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        );
+        date_picker_dialog.show();
     }
 
     protected UserProfile get_user_profile() throws Exception {
@@ -78,11 +86,10 @@ abstract class ProfileForm extends AppCompatActivity {
         String email = et_email.getText().toString();
         String password = et_password.getText().toString();
         String fullname = et_fullname.getText().toString();
-        Date birthday = new Date();
+        Date birthday = calendar.getTime();
         String phone = et_phone.getText().toString();
         boolean usertype = true;
         boolean sex = false;
-
 
         if (email.equals("")) {
             throw new Exception(getString(R.string.warning_email_filled));
@@ -94,7 +101,7 @@ abstract class ProfileForm extends AppCompatActivity {
             throw new Exception(getString(R.string.warning_password_invalid));
         } else if (fullname.equals("")) {
             throw new Exception(getString(R.string.warning_full_name_filled));
-        } else if (false) {
+        } else if (birthday.equals("")) {
             throw new Exception(getString(R.string.warning_birthday_filled));
         } else if (phone.equals("")) {
             throw new Exception(getString(R.string.warning_phone_number_filled));

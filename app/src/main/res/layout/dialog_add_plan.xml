@@ -20,6 +20,7 @@
         android:layout_below="@id/addplan_et_name"
         android:layout_marginTop="10sp"
         android:inputType="date"
+        android:focusable="false"
         android:hint="@string/enter_plan_date" />
 
     <EditText
@@ -29,6 +30,7 @@
         android:layout_below="@id/addplan_et_date"
         android:layout_marginTop="10sp"
         android:inputType="time"
+        android:focusable="false"
         android:hint="@string/enter_plan_time" />
 
     <EditText

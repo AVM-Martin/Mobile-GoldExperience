@@ -8,6 +8,8 @@ final public class GoldExperience extends Application {
     final static String PACKAGE_NAME = "id.my.avmmartin.goldexperience";
     final static String INTENT_EMAIL = PACKAGE_NAME + ".EMAIL";
     final static String INTENT_PLACE_ID = PACKAGE_NAME + ".PLACE_ID";
+    final static String FORMAT_DATE = "dd/MM/yyyy";
+    final static String FORMAT_TIME = "hh:mm a";
 
     final private int GUEST = -1;
 

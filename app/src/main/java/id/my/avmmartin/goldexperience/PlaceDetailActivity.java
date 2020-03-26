@@ -56,10 +56,9 @@ public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDia
     }
 
     @Override public void addplandialog_btn_submit_onclick(AddPlanDialog dialog) {
-        // TODO QUIZ: get all data
         String name = dialog.et_name.getText().toString();
-        Date date = new Date();
-        Date time = new Date();
+        Date date = dialog.calendar.getTime();
+        Date time = dialog.calendar.getTime();
         String note = dialog.et_note.getText().toString();
 
         Plan plan = new Plan(-1, place.id, main_app.get_user_id(), name, date, time, note);

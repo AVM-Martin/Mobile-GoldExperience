@@ -1,5 +1,9 @@
 package id.my.avmmartin.goldexperience;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 class Helper {
     static boolean is_valid_email(String email) {
         if (!email.contains("@")) {
@@ -30,5 +34,15 @@ class Helper {
 
     static boolean is_valid_phone_number(String phone) {
         return phone.startsWith("+62");
+    }
+
+    static String to_date_format(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat(GoldExperience.FORMAT_DATE, Locale.US);
+        return sdf.format(date);
+    }
+
+    static String to_time_format(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat(GoldExperience.FORMAT_TIME, Locale.US);
+        return sdf.format(date);
     }
 }
