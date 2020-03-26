@@ -33,7 +33,7 @@ public class PlanListActivity extends AppCompatActivity implements DeletePlanDia
         lv_plandata.setAdapter(new PlanListAdapter(this, main_app.get_user_plans()));
     }
 
-    public void removePayOnClickHandler(View view) {
+    public void planlistadapter_btn_delete_onclick(View view) {
         DeletePlanDialog dialog = new DeletePlanDialog();
         dialog.set_datas((Plan)view.getTag());
         dialog.show(getSupportFragmentManager(), "");
