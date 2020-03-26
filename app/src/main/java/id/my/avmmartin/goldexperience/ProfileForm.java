@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import java.util.Calendar;
@@ -21,7 +23,7 @@ abstract class ProfileForm extends AppCompatActivity {
     private EditText et_birthday;
     private EditText et_phone;
     private Spinner sp_usertype;
-    private View rd_sex;
+    private RadioGroup rd_sex;
     private Calendar calendar;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +54,13 @@ abstract class ProfileForm extends AppCompatActivity {
     }
 
     protected void load_data(UserProfile user) {
-        // TODO QUIZ: load data
         et_email.setText(user.email);
         et_password.setText(user.password);
         et_fullname.setText(user.fullname);
         et_birthday.setText(Helper.to_date_format(user.birthday));
         et_phone.setText(user.phone);
         sp_usertype.setSelection(user.usertype_vip ? 1 : 0);
-        // rd_sex = findViewById(R.id.t_profile_rd_sex);
+        ((RadioButton)rd_sex.getChildAt(user.sex_male ? 1 : 2)).setChecked(true);
         calendar.setTime(user.birthday);
     }
 
@@ -82,14 +83,13 @@ abstract class ProfileForm extends AppCompatActivity {
     }
 
     protected UserProfile get_user_profile() throws Exception {
-        // TODO QUIZ: get data
         String email = et_email.getText().toString();
         String password = et_password.getText().toString();
         String fullname = et_fullname.getText().toString();
         Date birthday = calendar.getTime();
         String phone = et_phone.getText().toString();
         boolean usertype_vip = sp_usertype.getSelectedItem().toString().contains("VIP");
-        boolean sex = false;
+        boolean sex_male = rd_sex.getCheckedRadioButtonId() == R.id.t_profile_rd_sex_male;
 
         if (email.equals("")) {
             throw new Exception(getString(R.string.warning_email_filled));
@@ -101,16 +101,16 @@ abstract class ProfileForm extends AppCompatActivity {
             throw new Exception(getString(R.string.warning_password_invalid));
         } else if (fullname.equals("")) {
             throw new Exception(getString(R.string.warning_full_name_filled));
-        } else if (birthday.equals("")) {
+        } else if (et_birthday.getText().toString().equals("")) {
             throw new Exception(getString(R.string.warning_birthday_filled));
         } else if (phone.equals("")) {
             throw new Exception(getString(R.string.warning_phone_number_filled));
         } else if (!Helper.is_valid_phone_number(phone)) {
             throw new Exception(getString(R.string.warning_phone_number_invalid));
-        } else if (false) {
+        } else if (rd_sex.getCheckedRadioButtonId() == -1) {
             throw new Exception(getString(R.string.warning_gender_filled));
         } else {
-            return new UserProfile(-1, email, password, fullname, birthday, phone, usertype_vip, sex);
+            return new UserProfile(-1, email, password, fullname, birthday, phone, usertype_vip, sex_male);
         }
     }
 }
