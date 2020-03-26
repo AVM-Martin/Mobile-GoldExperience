@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
-public class PlanListActivity extends AppCompatActivity {
+public class PlanListActivity extends AppCompatActivity implements DeletePlanDialog.DeletePlanDialogListener {
     private GoldExperience main_app;
     private ListView lv_plandata;
 
@@ -34,7 +34,12 @@ public class PlanListActivity extends AppCompatActivity {
     }
 
     public void removePayOnClickHandler(View view) {
-        Plan plan = (Plan)view.getTag();
-        // TODO QUIZ: delete it from database
+        DeletePlanDialog dialog = new DeletePlanDialog();
+        dialog.set_datas((Plan)view.getTag());
+        dialog.show(getSupportFragmentManager(), "");
+    }
+
+    @Override public void deleteplandialog_btn_submit_onclick(DeletePlanDialog dialog) {
+        main_app.delete_plan(dialog.plan.id);
     }
 }

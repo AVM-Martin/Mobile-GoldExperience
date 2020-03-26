@@ -96,4 +96,20 @@ final public class GoldExperience extends Application {
 
         return result;
     }
+
+    public void delete_plan(int id) {
+        int plan_index = -1;
+
+        for (int idx = 0; idx < plans.size(); idx++) {
+            Plan plan = plans.get(idx);
+
+            if (plan.id == id) {
+                plan_index = idx;
+            }
+        }
+
+        if (plan_index != -1) {
+            plans.remove(plan_index);
+        }
+    }
 }

@@ -43,6 +43,8 @@
     <string name="submit">Submit</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <string name="add_to_my_plan">Add to My Plan</string>
     <string name="title_place_list">Place List</string>
