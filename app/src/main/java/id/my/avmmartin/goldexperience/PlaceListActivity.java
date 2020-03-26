@@ -64,9 +64,7 @@ public class PlaceListActivity extends AppCompatActivity {
     }
 
     private void load_data() {
-        lv_placedata.setAdapter(new ArrayAdapter<>(
-            this, android.R.layout.simple_list_item_1, main_app.get_places()
-        ));
+        lv_placedata.setAdapter(new PlaceListAdapter(this, main_app.get_places()));
         lv_placedata.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(PlaceListActivity.this, PlaceDetailActivity.class);
