@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
+    private GoldExperience main_app;
     private EditText et_email;
     private EditText et_password;
     private Button btn_login;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void init_components() {
+        main_app = (GoldExperience)this.getApplication();
         et_email = findViewById(R.id.login_et_email);
         et_password = findViewById(R.id.login_et_password);
         btn_login = findViewById(R.id.login_btn_login);
@@ -54,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, R.string.warning_email_filled, Toast.LENGTH_SHORT).show();
         } else if (password.equals("")) {
             Toast.makeText(LoginActivity.this, R.string.warning_password_filled, Toast.LENGTH_SHORT).show();
-        } else if (!((GoldExperience) this.getApplication()).login(email, password)) {
+        } else if (!main_app.login(email, password)) {
             Toast.makeText(LoginActivity.this, R.string.warning_not_match_account, Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(LoginActivity.this, PlaceListActivity.class);

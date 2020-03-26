@@ -31,7 +31,6 @@ final public class GoldExperience extends Application {
     }
 
     boolean login(String email, String password) {
-        // TODO QUIZ: hard-coded find user
         for (int idx = 0; idx < users.size(); idx++) {
             UserProfile user = users.get(idx);
 
@@ -63,7 +62,6 @@ final public class GoldExperience extends Application {
     }
 
     public void register_user(UserProfile user) {
-        // TODO QUIZ: validate duplicate email
         user.id = users.size();
         users.add(user);
     }
