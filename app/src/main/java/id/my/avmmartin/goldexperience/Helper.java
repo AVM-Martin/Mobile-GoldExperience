@@ -14,11 +14,18 @@ class Helper {
     }
 
     static boolean is_valid_password(String password) {
-        if (password.length() < 6) {
-            return false;
-        } else {
-            return password.matches(".*(\\w.*\\d|\\d.*\\w).*");
+        boolean contains_alpha = false;
+        boolean contains_digit = false;
+
+        for (int idx = 0; idx < password.length(); idx++) {
+            if (Character.isLetter(password.charAt(idx))) {
+                contains_alpha = true;
+            } else if (Character.isDigit(password.charAt(idx))) {
+                contains_digit = true;
+            }
         }
+
+        return password.length() >= 6 && contains_alpha && contains_digit;
     }
 
     static boolean is_valid_phone_number(String phone) {
