@@ -11,11 +11,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 class DeletePlanDialog extends DialogFragment {
-    public interface DeletePlanDialogListener {
-        void deleteplandialog_btn_submit_onclick(DeletePlanDialog dialog);
+    public interface Listener {
+        void btn_submit_onclick(DeletePlanDialog dialog);
     }
 
-    private DeletePlanDialog.DeletePlanDialogListener listener;
+    private DeletePlanDialog.Listener listener;
     Plan plan;
 
     void set_datas(Plan _plan) {
@@ -26,9 +26,9 @@ class DeletePlanDialog extends DialogFragment {
         super.onAttach(context);
 
         try {
-            listener = (DeletePlanDialog.DeletePlanDialogListener)context;
+            listener = (DeletePlanDialog.Listener)context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().toString() + " must implement DeletePlanDialogListener");
+            throw new ClassCastException(getActivity().toString() + " must implement DeletePlanDialog.Listener");
         }
     }
 
@@ -43,7 +43,7 @@ class DeletePlanDialog extends DialogFragment {
         });
         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override public void onClick(DialogInterface dialog, int which) {
-                listener.deleteplandialog_btn_submit_onclick(DeletePlanDialog.this);
+                listener.btn_submit_onclick(DeletePlanDialog.this);
             }
         });
 

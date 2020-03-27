@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
-public class PlanListActivity extends AppCompatActivity implements DeletePlanDialog.DeletePlanDialogListener {
+public class PlanListActivity extends AppCompatActivity implements DeletePlanDialog.Listener {
     private GoldExperience main_app;
     private ListView lv_plandata;
 
@@ -39,7 +39,7 @@ public class PlanListActivity extends AppCompatActivity implements DeletePlanDia
         dialog.show(getSupportFragmentManager(), "");
     }
 
-    @Override public void deleteplandialog_btn_submit_onclick(DeletePlanDialog dialog) {
+    @Override public void btn_submit_onclick(DeletePlanDialog dialog) {
         main_app.delete_plan(dialog.plan.id);
         load_data();
     }

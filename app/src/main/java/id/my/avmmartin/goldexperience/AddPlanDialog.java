@@ -20,11 +20,11 @@ import androidx.fragment.app.DialogFragment;
 import java.util.Calendar;
 
 final class AddPlanDialog extends DialogFragment {
-    public interface AddPlanDialogListener {
-        void addplandialog_btn_submit_onclick(AddPlanDialog dialog);
+    public interface Listener {
+        void btn_submit_onclick(AddPlanDialog dialog);
     }
 
-    private AddPlanDialogListener listener;
+    private AddPlanDialog.Listener listener;
     TextView et_name;
     TextView et_date;
     TextView et_time;
@@ -35,9 +35,9 @@ final class AddPlanDialog extends DialogFragment {
         super.onAttach(context);
 
         try {
-            listener = (AddPlanDialogListener)context;
+            listener = (AddPlanDialog.Listener)context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().toString() + " must implement AddPlanDialogListener");
+            throw new ClassCastException(getActivity().toString() + " must implement AddPlanDialog.Listener");
         }
     }
 
@@ -71,7 +71,7 @@ final class AddPlanDialog extends DialogFragment {
         });
         builder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
             @Override public void onClick(DialogInterface dialog, int which) {
-                listener.addplandialog_btn_submit_onclick(AddPlanDialog.this);
+                listener.btn_submit_onclick(AddPlanDialog.this);
             }
         });
 

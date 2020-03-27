@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.Date;
 
-public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDialog.AddPlanDialogListener {
+public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDialog.Listener {
     private GoldExperience main_app;
     private TextView tv_name;
     private RatingBar rb_rating;
@@ -55,7 +55,7 @@ public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDia
         dialog.show(getSupportFragmentManager(), "");
     }
 
-    @Override public void addplandialog_btn_submit_onclick(AddPlanDialog dialog) {
+    @Override public void btn_submit_onclick(AddPlanDialog dialog) {
         String name = dialog.et_name.getText().toString();
         Date date = dialog.calendar.getTime();
         Date time = dialog.calendar.getTime();
