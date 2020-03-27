@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class PlaceListActivity extends AppCompatActivity {
+public class PlaceListActivity extends AppCompatActivity implements LoadDataTask.Listener {
     private GoldExperience main_app;
     private ListView lv_placedata;
     private BottomNavigationView bottomnav;
@@ -29,13 +29,9 @@ public class PlaceListActivity extends AppCompatActivity {
             Intent intent = new Intent(PlaceListActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+        } else {
+            new LoadDataTask(PlaceListActivity.this).execute();
         }
-    }
-
-    @Override protected void onStart() {
-        super.onStart();
-
-        load_data();
     }
 
     private void init_components() {
@@ -62,7 +58,7 @@ public class PlaceListActivity extends AppCompatActivity {
         );
     }
 
-    private void load_data() {
+    @Override public void load_data() {
         lv_placedata.setAdapter(new PlaceListAdapter(this, main_app.get_places()));
         lv_placedata.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
