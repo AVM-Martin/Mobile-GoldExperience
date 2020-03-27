@@ -4,25 +4,25 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
-class LoadDataTask extends AsyncTask<Void, String, Void> {
+class LoadDataIndicator extends AsyncTask<Void, String, Void> {
     public interface Listener {
         void load_data();
     }
 
-    private LoadDataTask.Listener listener;
+    private LoadDataIndicator.Listener listener;
     private ProgressDialog dialogue;
 
-    LoadDataTask(Context context) {
+    LoadDataIndicator(Context context) {
         super();
 
-        listener = (LoadDataTask.Listener)context;
+        listener = (LoadDataIndicator.Listener)context;
     }
 
     @Override protected void onPreExecute() {
         super.onPreExecute();
 
         dialogue = new ProgressDialog((Context)listener);
-        dialogue.setTitle("Loading items..");
+        dialogue.setTitle(R.string.load_data);
         dialogue.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         dialogue.setIndeterminate(true);
         dialogue.show();
