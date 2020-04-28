@@ -39,6 +39,11 @@
   * https://www.journaldev.com/17899/java-simpledateformat-java-date-format
 
 
+## Useful Information
+
+  * http://www.programmersought.com/article/1187676681/
+
+
 ## Image Resources
 
   * https://www.flaticon.com/authors/freepik

@@ -71,7 +71,7 @@ public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDia
         Date time = dialog.getCalendar().getTime();
         String note = dialog.getEtNote().getText().toString();
 
-        Plan plan = new Plan(-1, place.getId(), mainApp.getUserId(), name, date, time, note);
+        Plan plan = new Plan(-1, place.getId(), mainApp.getAppUserId(), name, date, time, note);
         mainApp.addNewPlan(plan);
     }
 }

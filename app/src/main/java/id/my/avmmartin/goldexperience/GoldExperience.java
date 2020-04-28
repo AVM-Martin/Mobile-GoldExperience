@@ -39,7 +39,7 @@ public class GoldExperience extends Application {
         userId = GUEST;
     }
 
-    public int getUserId() {
+    public int getAppUserId() {
         return userId;
     }
 
