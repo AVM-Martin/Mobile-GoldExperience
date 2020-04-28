@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="30sp"
-    tools:context=".PlaceDetailActivity" >
+    tools:context=".activity.PlaceDetailActivity" >
 
     <TextView
         android:id="@+id/placedetail_tv_name"

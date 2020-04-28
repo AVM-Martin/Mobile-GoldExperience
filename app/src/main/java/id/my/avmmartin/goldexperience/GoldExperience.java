@@ -4,19 +4,102 @@ import android.app.Application;
 
 import java.util.Vector;
 
-final public class GoldExperience extends Application {
-    final static String PACKAGE_NAME = "id.my.avmmartin.goldexperience";
-    final static String INTENT_EMAIL = PACKAGE_NAME + ".EMAIL";
-    final static String INTENT_PLACE_ID = PACKAGE_NAME + ".PLACE_ID";
-    final static String FORMAT_DATE = "dd/MM/yyyy";
-    final static String FORMAT_TIME = "hh:mm a";
+import id.my.avmmartin.goldexperience.data.model.Place;
+import id.my.avmmartin.goldexperience.data.model.Plan;
+import id.my.avmmartin.goldexperience.data.model.User;
 
-    final private int GUEST = -1;
+public class GoldExperience extends Application {
+    private static final int GUEST = -1;
 
-    private int user_id = GUEST;
-    private Vector<UserProfile> users = new Vector<>();
+    private int userId = GUEST;
+    private Vector<User> users = new Vector<>();
     private Vector<Place> places = new Vector<>();
     private Vector<Plan> plans = new Vector<>();
+
+    public boolean login(String email, String password) {
+        for (int idx = 0; idx < users.size(); idx++) {
+            User user = users.get(idx);
+
+            if (user.getEmail().equals(email)) {
+                if (user.isValidPassword(password)) {
+                    userId = idx;
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isLoggedIn() {
+        return userId != GUEST;
+    }
+
+    public void logout() {
+        userId = GUEST;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public User getProfile() {
+        return users.get(userId);
+    }
+
+    public void registerUser(User user) {
+        user.setId(users.size());
+        users.add(user);
+    }
+
+    public void updateUser(User user) {
+        users.set(userId, user);
+    }
+
+    public Vector<Place> getPlaces() {
+        // TODO: call the JSON API at https://api.myjson.com/bins/iocic
+        return places;
+    }
+
+    public Place getPlace(int id) {
+        // TODO: call the JSON API at https://api.myjson.com/bins/iocic
+        return places.get(id);
+    }
+
+    public void addNewPlan(Plan plan) {
+        plan.setId(plans.size());
+        plans.add(plan);
+    }
+
+    public Vector<Plan> getUserPlans() {
+        Vector<Plan> result = new Vector<>();
+
+        for (Plan plan: plans) {
+            if (plan.getFkUserId() == userId) {
+                result.add(plan);
+            }
+        }
+
+        return result;
+    }
+
+    public void deletePlan(int id) {
+        int planIndex = -1;
+
+        for (int idx = 0; idx < plans.size(); idx++) {
+            Plan plan = plans.get(idx);
+
+            if (plan.getId() == id) {
+                planIndex = idx;
+            }
+        }
+
+        if (planIndex != -1) {
+            plans.remove(planIndex);
+        }
+    }
+
+    // constructor
 
     public GoldExperience() {
         // TODO: hard-coded database
@@ -28,88 +111,5 @@ final public class GoldExperience extends Application {
             places.size(), "Pink Beach", 5,
             "The best place in Lombok", -6.2261741, 106.9078293)
         );
-    }
-
-    boolean login(String email, String password) {
-        for (int idx = 0; idx < users.size(); idx++) {
-            UserProfile user = users.get(idx);
-
-            if (user.email.equals(email)) {
-                if (user.password.equals(password)) {
-                    user_id = idx;
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    boolean is_logged_in() {
-        return user_id != GUEST;
-    }
-
-    void logout() {
-        user_id = GUEST;
-    }
-
-    public int get_user_id() {
-        return user_id;
-    }
-
-    UserProfile get_profile() {
-        return users.get(user_id);
-    }
-
-    public void register_user(UserProfile user) {
-        user.id = users.size();
-        users.add(user);
-    }
-
-    public void update_user(UserProfile user) {
-        users.set(user_id, user);
-    }
-
-    public Vector<Place> get_places() {
-        // TODO: call the JSON API at https://api.myjson.com/bins/iocic
-        return places;
-    }
-
-    public Place get_place(int id) {
-        // TODO: call the JSON API at https://api.myjson.com/bins/iocic
-        return places.get(id);
-    }
-
-    public void add_new_plan(Plan plan) {
-        plan.id = plans.size();
-        plans.add(plan);
-    }
-
-    public Vector<Plan> get_user_plans() {
-        Vector<Plan> result = new Vector<>();
-
-        for (Plan plan: plans) {
-            if (plan.fk_userid == user_id) {
-                result.add(plan);
-            }
-        }
-
-        return result;
-    }
-
-    public void delete_plan(int id) {
-        int plan_index = -1;
-
-        for (int idx = 0; idx < plans.size(); idx++) {
-            Plan plan = plans.get(idx);
-
-            if (plan.id == id) {
-                plan_index = idx;
-            }
-        }
-
-        if (plan_index != -1) {
-            plans.remove(plan_index);
-        }
     }
 }

@@ -1,4 +1,4 @@
-package id.my.avmmartin.goldexperience;
+package id.my.avmmartin.goldexperience.activity.dialog;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -19,19 +19,23 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
-final class AddPlanDialog extends DialogFragment {
+import id.my.avmmartin.goldexperience.R;
+import id.my.avmmartin.goldexperience.utils.Helper;
+
+public class AddPlanDialog extends DialogFragment {
     public interface Listener {
-        void btn_submit_onclick(AddPlanDialog dialog);
+        void btnSubmitOnClick(AddPlanDialog dialog);
     }
 
     private AddPlanDialog.Listener listener;
-    TextView et_name;
-    TextView et_date;
-    TextView et_time;
-    TextView et_note;
-    Calendar calendar;
+    private TextView etName;
+    private TextView etDate;
+    private TextView etTime;
+    private TextView etNote;
+    private Calendar calendar;
 
-    @Override public void onAttach(@NonNull Context context) {
+    @Override
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
         try {
@@ -41,52 +45,59 @@ final class AddPlanDialog extends DialogFragment {
         }
     }
 
-    @NonNull @Override public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_add_plan, null);
-        et_name = view.findViewById(R.id.addplan_et_name);
-        et_date = view.findViewById(R.id.addplan_et_date);
-        et_time = view.findViewById(R.id.addplan_et_time);
-        et_note = view.findViewById(R.id.addplan_et_note);
+        etName = view.findViewById(R.id.addplan_et_name);
+        etDate = view.findViewById(R.id.addplan_et_date);
+        etTime = view.findViewById(R.id.addplan_et_time);
+        etNote = view.findViewById(R.id.addplan_et_note);
         calendar = Calendar.getInstance();
 
-        et_date.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
-                et_date_onclick(view);
+        etDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etDateOnclick(view);
             }
         });
-        et_time.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
-                et_time_onclick(view);
+        etTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etTimeOnclick(view);
             }
         });
 
         builder.setView(view);
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override public void onClick(DialogInterface dialog, int which) {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
         builder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
-            @Override public void onClick(DialogInterface dialog, int which) {
-                listener.btn_submit_onclick(AddPlanDialog.this);
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                listener.btnSubmitOnClick(AddPlanDialog.this);
             }
         });
 
         return builder.create();
     }
 
-    private void et_date_onclick(View view) {
+    private void etDateOnclick(View view) {
         DatePickerDialog date_picker_dialog = new DatePickerDialog(
             this.getContext(),
             new DatePickerDialog.OnDateSetListener() {
-                @Override public void onDateSet(DatePicker view, int year, int month, int day) {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int day) {
                     calendar.set(Calendar.YEAR, year);
                     calendar.set(Calendar.MONTH, month);
                     calendar.set(Calendar.DAY_OF_MONTH, day);
-                    et_date.setText(Helper.to_date_format(calendar.getTime()));
+                    etDate.setText(Helper.toDateFormat(calendar.getTime()));
                 }
             },
             calendar.get(Calendar.YEAR),
@@ -96,14 +107,15 @@ final class AddPlanDialog extends DialogFragment {
         date_picker_dialog.show();
     }
 
-    private void et_time_onclick(View view) {
+    private void etTimeOnclick(View view) {
         TimePickerDialog time_picker_dialog = new TimePickerDialog(
             this.getContext(),
             new TimePickerDialog.OnTimeSetListener() {
-                @Override public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                     calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     calendar.set(Calendar.MINUTE, minute);
-                    et_time.setText(Helper.to_time_format(calendar.getTime()));
+                    etTime.setText(Helper.toTimeFormat(calendar.getTime()));
                 }
             },
             calendar.get(Calendar.HOUR_OF_DAY),
@@ -111,5 +123,19 @@ final class AddPlanDialog extends DialogFragment {
             true
         );
         time_picker_dialog.show();
+    }
+
+    // getter
+
+    public TextView getEtName() {
+        return etName;
+    }
+
+    public TextView getEtNote() {
+        return etNote;
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
     }
 }

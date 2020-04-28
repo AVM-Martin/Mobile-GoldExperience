@@ -13,7 +13,7 @@
         android:layout_centerInParent="true"
         android:textColor="@color/white"
         android:backgroundTint="@color/colorAccent"
-        android:onClick="planlistadapter_btn_delete_onclick"
+        android:onClick="planListAdapterBtnDeleteOnClick"
         android:text="@string/delete" />
 
     <LinearLayout

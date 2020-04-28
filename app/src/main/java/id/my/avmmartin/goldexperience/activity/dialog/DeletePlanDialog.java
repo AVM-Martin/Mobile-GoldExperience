@@ -1,4 +1,4 @@
-package id.my.avmmartin.goldexperience;
+package id.my.avmmartin.goldexperience.activity.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -10,19 +10,23 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-class DeletePlanDialog extends DialogFragment {
+import id.my.avmmartin.goldexperience.R;
+import id.my.avmmartin.goldexperience.data.model.Plan;
+
+public class DeletePlanDialog extends DialogFragment {
     public interface Listener {
-        void btn_submit_onclick(DeletePlanDialog dialog);
+        void btnSubmitOnClick(DeletePlanDialog dialog);
     }
 
     private DeletePlanDialog.Listener listener;
-    Plan plan;
+    private Plan plan;
 
-    void set_datas(Plan _plan) {
-        plan = _plan;
+    public void setDatas(Plan plan) {
+        this.plan = plan;
     }
 
-    @Override public void onAttach(@NonNull Context context) {
+    @Override
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
         try {
@@ -32,21 +36,31 @@ class DeletePlanDialog extends DialogFragment {
         }
     }
 
-    @NonNull @Override public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-        builder.setMessage(getString(R.string.delete) + " " + plan.name + "?");
+        builder.setMessage(getString(R.string.delete) + " " + plan.getName() + "?");
         builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-            @Override public void onClick(DialogInterface dialog, int which) {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-            @Override public void onClick(DialogInterface dialog, int which) {
-                listener.btn_submit_onclick(DeletePlanDialog.this);
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                listener.btnSubmitOnClick(DeletePlanDialog.this);
             }
         });
 
         return builder.create();
+    }
+
+    // getter
+
+    public Plan getPlan() {
+        return plan;
     }
 }
