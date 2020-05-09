@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import id.my.avmmartin.goldexperience.R;
 import id.my.avmmartin.goldexperience.data.model.User;
+import id.my.avmmartin.goldexperience.exception.EmptyEntryException;
+import id.my.avmmartin.goldexperience.exception.InvalidEntryException;
 import id.my.avmmartin.goldexperience.utils.Constants;
 
 public class RegisterActivity extends ProfileForm {
@@ -60,18 +62,20 @@ public class RegisterActivity extends ProfileForm {
             User user = super.getUser();
 
             if (!tnc) {
-                throw new Exception(getString(R.string.warning_tnc_checked));
+                throw new EmptyEntryException(R.string.warning_tnc_checked);
             }
 
-            // TODO: welcome message via SMS
-            mainApp.registerUser(user);
+            mainApp.getDataManager().register(user);
 
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.putExtra(Constants.INTENT_EMAIL, user.getEmail());
             startActivity(intent);
-        } catch (Exception e) {
-            Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        } catch (EmptyEntryException e) {
+            Toast.makeText(RegisterActivity.this, getString(e.getErrorId()), Toast.LENGTH_SHORT).show();
+        } catch (InvalidEntryException e) {
+            Toast.makeText(RegisterActivity.this, getString(e.getErrorId()), Toast.LENGTH_SHORT).show();
         }
     }
 }

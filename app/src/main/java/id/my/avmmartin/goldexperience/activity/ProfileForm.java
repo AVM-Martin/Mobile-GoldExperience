@@ -13,11 +13,12 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import id.my.avmmartin.goldexperience.GoldExperience;
 import id.my.avmmartin.goldexperience.R;
 import id.my.avmmartin.goldexperience.data.model.User;
+import id.my.avmmartin.goldexperience.exception.EmptyEntryException;
+import id.my.avmmartin.goldexperience.exception.InvalidEntryException;
 import id.my.avmmartin.goldexperience.utils.Helper;
 
 abstract class ProfileForm extends AppCompatActivity {
@@ -69,7 +70,7 @@ abstract class ProfileForm extends AppCompatActivity {
         spUserType.setSelection(user.isUserTypeVIP() ? 1 : 0);
         ((RadioButton) rdSex.getChildAt(user.isSexMale() ? 1 : 2)).setChecked(true);
 
-        calendar.setTime(user.getBirthday());
+        calendar.setTimeInMillis(user.getBirthday().getTimeInMillis());
     }
 
     private void etBirthdayOnClick(View view) {
@@ -81,7 +82,7 @@ abstract class ProfileForm extends AppCompatActivity {
                     calendar.set(Calendar.YEAR, year);
                     calendar.set(Calendar.MONTH, month);
                     calendar.set(Calendar.DAY_OF_MONTH, day);
-                    etBirthday.setText(Helper.toDateFormat(calendar.getTime()));
+                    etBirthday.setText(Helper.toDateFormat(calendar));
                 }
             },
             calendar.get(Calendar.YEAR),
@@ -91,35 +92,45 @@ abstract class ProfileForm extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    protected User getUser() throws Exception {
+    protected User getUser() throws EmptyEntryException, InvalidEntryException {
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
         String fullName = etFullName.getText().toString();
-        Date birthday = calendar.getTime();
+        Calendar birthday = calendar;
         String phone = etPhone.getText().toString();
         boolean userTypeVIP = spUserType.getSelectedItem().toString().contains("VIP");
         boolean sexMale = rdSex.getCheckedRadioButtonId() == R.id.t_profile_rd_sex_male;
 
         if (email.equals("")) {
-            throw new Exception(getString(R.string.warning_email_filled));
+            throw new EmptyEntryException(R.string.warning_email_filled);
         } else if (!Helper.isValidEmail(email)) {
-            throw new Exception(getString(R.string.warning_email_invalid));
-        } else if (password.equals("")) {
-            throw new Exception(getString(R.string.warning_password_filled));
-        } else if (!Helper.isValidPassword(password)) {
-            throw new Exception(getString(R.string.warning_password_invalid));
-        } else if (fullName.equals("")) {
-            throw new Exception(getString(R.string.warning_full_name_filled));
-        } else if (etBirthday.getText().toString().equals("")) {
-            throw new Exception(getString(R.string.warning_birthday_filled));
-        } else if (phone.equals("")) {
-            throw new Exception(getString(R.string.warning_phone_number_filled));
-        } else if (!Helper.isValidPhoneNumber(phone)) {
-            throw new Exception(getString(R.string.warning_phone_number_invalid));
-        } else if (rdSex.getCheckedRadioButtonId() == -1) {
-            throw new Exception(getString(R.string.warning_gender_filled));
-        } else {
-            return new User(-1, email, password, fullName, birthday, phone, userTypeVIP, sexMale);
+            throw new InvalidEntryException(R.string.warning_email_invalid);
         }
+
+        if (password.equals("")) {
+            throw new EmptyEntryException(R.string.warning_password_filled);
+        } else if (!Helper.isValidPassword(password)) {
+            throw new InvalidEntryException(R.string.warning_password_invalid);
+        }
+
+        if (fullName.equals("")) {
+            throw new EmptyEntryException(R.string.warning_full_name_filled);
+        }
+
+        if (etBirthday.getText().toString().equals("")) {
+            throw new EmptyEntryException(R.string.warning_birthday_filled);
+        }
+
+        if (phone.equals("")) {
+            throw new EmptyEntryException(R.string.warning_phone_number_filled);
+        } else if (!Helper.isValidPhoneNumber(phone)) {
+            throw new InvalidEntryException(R.string.warning_phone_number_invalid);
+        }
+
+        if (rdSex.getCheckedRadioButtonId() == -1) {
+            throw new EmptyEntryException(R.string.warning_gender_filled);
+        }
+
+        return new User(-1, email, password, fullName, birthday, phone, userTypeVIP, sexMale);
     }
 }

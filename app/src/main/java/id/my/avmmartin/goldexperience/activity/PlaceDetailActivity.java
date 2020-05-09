@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import id.my.avmmartin.goldexperience.GoldExperience;
 import id.my.avmmartin.goldexperience.R;
@@ -23,6 +23,7 @@ public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDia
     private RatingBar rbRating;
     private TextView tvDescription;
     private Button btnAddPlace;
+
     private Place place;
 
     @Override
@@ -41,7 +42,9 @@ public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDia
         rbRating = findViewById(R.id.placedetail_rb_rating);
         tvDescription = findViewById(R.id.placedetail_tv_description);
         btnAddPlace = findViewById(R.id.placedetail_btn_addplace);
-        place = mainApp.getPlace(getIntent().getIntExtra(Constants.INTENT_PLACE_ID, -1));
+
+        int placeId = getIntent().getIntExtra(Constants.INTENT_PLACE_ID, -1);
+        place = mainApp.getDataManager().getPlace(placeId);
     }
 
     private void loadDatas() {
@@ -67,11 +70,12 @@ public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDia
     @Override
     public void btnSubmitOnClick(AddPlanDialog dialog) {
         String name = dialog.getEtName().getText().toString();
-        Date date = dialog.getCalendar().getTime();
-        Date time = dialog.getCalendar().getTime();
+        Calendar date = dialog.getCalendar();
+        Calendar time = dialog.getCalendar();
         String note = dialog.getEtNote().getText().toString();
 
-        Plan plan = new Plan(-1, place.getId(), mainApp.getAppUserId(), name, date, time, note);
-        mainApp.addNewPlan(plan);
+        int userId = mainApp.getDataManager().getAppUserId();
+        Plan plan = new Plan(-1, place.getId(), userId, name, date, time, note);
+        mainApp.getDataManager().insertNewPlan(plan);
     }
 }

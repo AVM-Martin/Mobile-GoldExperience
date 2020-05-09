@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import id.my.avmmartin.goldexperience.GoldExperience;
 import id.my.avmmartin.goldexperience.R;
+import id.my.avmmartin.goldexperience.exception.EmptyEntryException;
+import id.my.avmmartin.goldexperience.exception.InvalidCredentialsException;
 import id.my.avmmartin.goldexperience.utils.Constants;
 
 public class LoginActivity extends AppCompatActivity {
@@ -61,16 +63,25 @@ public class LoginActivity extends AppCompatActivity {
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
 
-        if (email.equals("")) {
-            Toast.makeText(LoginActivity.this, R.string.warning_email_filled, Toast.LENGTH_SHORT).show();
-        } else if (password.equals("")) {
-            Toast.makeText(LoginActivity.this, R.string.warning_password_filled, Toast.LENGTH_SHORT).show();
-        } else if (!mainApp.login(email, password)) {
-            Toast.makeText(LoginActivity.this, R.string.warning_not_match_account, Toast.LENGTH_SHORT).show();
-        } else {
+        try {
+            if (email.equals("")) {
+                throw new EmptyEntryException(R.string.warning_email_filled);
+            }
+
+            if (password.equals("")) {
+                throw new EmptyEntryException(R.string.warning_password_filled);
+            }
+
+            mainApp.getDataManager().login(email, password);
+
             Intent intent = new Intent(LoginActivity.this, PlaceListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+
+        } catch (InvalidCredentialsException e) {
+            Toast.makeText(LoginActivity.this, getString(e.getErrorId()), Toast.LENGTH_SHORT).show();
+        } catch (EmptyEntryException e) {
+            Toast.makeText(LoginActivity.this, getString(e.getErrorId()), Toast.LENGTH_SHORT).show();
         }
     }
 

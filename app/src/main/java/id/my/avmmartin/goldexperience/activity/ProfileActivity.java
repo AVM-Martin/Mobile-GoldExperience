@@ -8,11 +8,14 @@ import android.widget.Toast;
 
 import id.my.avmmartin.goldexperience.R;
 import id.my.avmmartin.goldexperience.data.model.User;
+import id.my.avmmartin.goldexperience.exception.EmptyEntryException;
+import id.my.avmmartin.goldexperience.exception.InvalidEntryException;
 import id.my.avmmartin.goldexperience.utils.Constants;
 
 public class ProfileActivity extends ProfileForm {
     private Button btnUpdate;
     private Button btnLogout;
+
     private User user;
 
     @Override
@@ -34,7 +37,7 @@ public class ProfileActivity extends ProfileForm {
     private void initComponents() {
         btnUpdate = findViewById(R.id.profile_btn_update);
         btnLogout = findViewById(R.id.profile_btn_logout);
-        user = mainApp.getProfile();
+        user = mainApp.getDataManager().getAppUser();
     }
 
     private void setEvents() {
@@ -56,14 +59,17 @@ public class ProfileActivity extends ProfileForm {
         try {
             user = super.getUser();
 
-            mainApp.updateUser(user);
+            mainApp.getDataManager().updateUser(user);
 
             Toast.makeText(ProfileActivity.this, R.string.success_update, Toast.LENGTH_SHORT).show();
             finish();
-        } catch (Exception e) {
-            Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        } catch (EmptyEntryException e) {
+            Toast.makeText(ProfileActivity.this, getString(e.getErrorId()), Toast.LENGTH_SHORT).show();
+        } catch (InvalidEntryException e) {
+            Toast.makeText(ProfileActivity.this, getString(e.getErrorId()), Toast.LENGTH_SHORT).show();
         } finally {
-            user = mainApp.getProfile();
+            user = mainApp.getDataManager().getAppUser();
         }
     }
 
@@ -72,7 +78,7 @@ public class ProfileActivity extends ProfileForm {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra(Constants.INTENT_EMAIL, user.getEmail());
 
-        mainApp.logout();
+        mainApp.getDataManager().logout();
         startActivity(intent);
     }
 }
