@@ -97,7 +97,7 @@ public class AddPlanDialog extends DialogFragment {
                     calendar.set(Calendar.YEAR, year);
                     calendar.set(Calendar.MONTH, month);
                     calendar.set(Calendar.DAY_OF_MONTH, day);
-                    etDate.setText(Helper.toDateFormat(calendar.getTime()));
+                    etDate.setText(Helper.toDateFormat(calendar));
                 }
             },
             calendar.get(Calendar.YEAR),
@@ -115,7 +115,7 @@ public class AddPlanDialog extends DialogFragment {
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                     calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     calendar.set(Calendar.MINUTE, minute);
-                    etTime.setText(Helper.toTimeFormat(calendar.getTime()));
+                    etTime.setText(Helper.toTimeFormat(calendar));
                 }
             },
             calendar.get(Calendar.HOUR_OF_DAY),
