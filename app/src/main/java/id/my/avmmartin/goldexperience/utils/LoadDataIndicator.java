@@ -11,15 +11,18 @@ public class LoadDataIndicator extends AsyncTask<Void, String, Void> {
         void loadData();
     }
 
-    private LoadDataIndicator.Listener listener;
+    private Listener listener;
     private ProgressDialog dialogue;
+
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
 
     // constructor
 
     public LoadDataIndicator(Context context) {
         super();
 
-        listener = (LoadDataIndicator.Listener)context;
         dialogue = new ProgressDialog(context);
     }
 

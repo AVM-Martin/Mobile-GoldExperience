@@ -1,13 +1,27 @@
 package id.my.avmmartin.goldexperience.data.model;
 
-import java.util.Date;
+import android.content.ContentValues;
+import android.database.Cursor;
+
+import java.util.Calendar;
+
+import id.my.avmmartin.goldexperience.data.UserManager;
 
 public class User {
+    private static final String ID = UserManager.ID;
+    private static final String EMAIL = UserManager.EMAIL;
+    private static final String PASSWORD = UserManager.PASSWORD;
+    private static final String FULLNAME = UserManager.FULLNAME;
+    private static final String BIRTHDAY = UserManager.BIRTHDAY;
+    private static final String PHONE = UserManager.PHONE;
+    private static final String USERTYPE = UserManager.USERTYPE;
+    private static final String SEX = UserManager.SEX;
+
     private int id;
     private String email;
     private String password;
     private String fullName;
-    private Date birthday;
+    private Calendar birthday;
     private String phone;
     private boolean userTypeVIP;
     private boolean sexMale;
@@ -16,11 +30,42 @@ public class User {
         return getPassword().equals(password);
     }
 
+    // database-related method
+
+    public User(Cursor cursor) {
+        setId(cursor.getInt(cursor.getColumnIndex(ID)));
+        setEmail(cursor.getString(cursor.getColumnIndex(EMAIL)));
+        setPassword(cursor.getString(cursor.getColumnIndex(PASSWORD)));
+        setFullName(cursor.getString(cursor.getColumnIndex(FULLNAME)));
+
+        Calendar birthday = Calendar.getInstance();
+        birthday.setTimeInMillis(cursor.getLong(cursor.getColumnIndex(BIRTHDAY)));
+        setBirthday(birthday);
+
+        setPhone(cursor.getString(cursor.getColumnIndex(PHONE)));
+        setUserTypeVIP(cursor.getInt(cursor.getColumnIndex(USERTYPE)) == 1);
+        setSexMale(cursor.getInt(cursor.getColumnIndex(SEX)) == 1);
+    }
+
+    public ContentValues toContentValues() {
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(EMAIL, getEmail());
+        contentValues.put(PASSWORD, getPassword());
+        contentValues.put(FULLNAME, getFullName());
+        contentValues.put(BIRTHDAY, getBirthday().getTimeInMillis());
+        contentValues.put(PHONE, getPhone());
+        contentValues.put(USERTYPE, isUserTypeVIP() ? 1 : 0);
+        contentValues.put(SEX, isSexMale() ? 1 : 0);
+
+        return contentValues;
+    }
+
     // constructor
 
     public User(
         int id, String email, String password, String fullName,
-        Date birthday, String phone, boolean userTypeVIP, boolean sexMale
+        Calendar birthday, String phone, boolean userTypeVIP, boolean sexMale
     ) {
         setId(id);
         setEmail(email);
@@ -50,7 +95,7 @@ public class User {
         return fullName;
     }
 
-    public Date getBirthday() {
+    public Calendar getBirthday() {
         return birthday;
     }
 
@@ -84,7 +129,7 @@ public class User {
         this.fullName = fullName;
     }
 
-    private void setBirthday(Date birthday) {
+    private void setBirthday(Calendar birthday) {
         this.birthday = birthday;
     }
 

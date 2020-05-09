@@ -1,16 +1,28 @@
 package id.my.avmmartin.goldexperience.data.model;
 
-import java.util.Date;
+import android.content.ContentValues;
+import android.database.Cursor;
 
+import java.util.Calendar;
+
+import id.my.avmmartin.goldexperience.data.PlanManager;
 import id.my.avmmartin.goldexperience.utils.Helper;
 
 public class Plan {
+    private static final String ID = PlanManager.ID;
+    private static final String FK_PLACE_ID = PlanManager.FK_PLACE_ID;
+    private static final String FK_USER_ID = PlanManager.FK_USER_ID;
+    private static final String NAME = PlanManager.NAME;
+    private static final String DATE = PlanManager.DATE;
+    private static final String TIME = PlanManager.TIME;
+    private static final String NOTE = PlanManager.NOTE;
+
     private int id;
     private int fkPlaceId;
     private int fkUserId;
     private String name;
-    private Date date;
-    private Date time;
+    private Calendar date;
+    private Calendar time;
     private String note;
 
     @Override
@@ -22,9 +34,42 @@ public class Plan {
         );
     }
 
+    // database-related method
+
+    public Plan(Cursor cursor) {
+        setId(cursor.getInt(cursor.getColumnIndex(ID)));
+        setFkPlaceId(cursor.getInt(cursor.getColumnIndex(FK_PLACE_ID)));
+        setFkUserId(cursor.getInt(cursor.getColumnIndex(FK_USER_ID)));
+
+        setName(cursor.getString(cursor.getColumnIndex(NAME)));
+
+        Calendar date = Calendar.getInstance();
+        date.setTimeInMillis(cursor.getLong(cursor.getColumnIndex(DATE)));
+        setDate(date);
+
+        Calendar time = Calendar.getInstance();
+        time.setTimeInMillis(cursor.getLong(cursor.getColumnIndex(TIME)));
+        setTime(time);
+
+        setNote(cursor.getString(cursor.getColumnIndex(NOTE)));
+    }
+
+    public ContentValues toContentValues() {
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(FK_PLACE_ID, getFkPlaceId());
+        contentValues.put(FK_USER_ID, getFkUserId());
+        contentValues.put(NAME, getName());
+        contentValues.put(DATE, getDate().getTimeInMillis());
+        contentValues.put(TIME, getTime().getTimeInMillis());
+        contentValues.put(NOTE, getNote());
+
+        return contentValues;
+    }
+
     // constructor
 
-    public Plan(int id, int fkPlaceId, int fkUserId, String name, Date date, Date time, String note) {
+    public Plan(int id, int fkPlaceId, int fkUserId, String name, Calendar date, Calendar time, String note) {
         setId(id);
         setFkPlaceId(fkPlaceId);
         setFkUserId(fkUserId);
@@ -53,11 +98,11 @@ public class Plan {
         return name;
     }
 
-    public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public Date getTime() {
+    public Calendar getTime() {
         return time;
     }
 
@@ -83,11 +128,11 @@ public class Plan {
         this.name = name;
     }
 
-    private void setDate(Date date) {
+    private void setDate(Calendar date) {
         this.date = date;
     }
 
-    private void setTime(Date time) {
+    private void setTime(Calendar time) {
         this.time = time;
     }
 

@@ -1,7 +1,7 @@
 package id.my.avmmartin.goldexperience.utils;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class Helper {
@@ -36,14 +36,14 @@ public class Helper {
         return phone.startsWith("+62");
     }
 
-    public static String toDateFormat(Date date) {
+    public static String toDateFormat(Calendar calendar) {
         SimpleDateFormat sdf = new SimpleDateFormat(Constants.FORMAT_DATE, Locale.US);
-        return sdf.format(date);
+        return sdf.format(calendar.getTime());
     }
 
-    public static String toTimeFormat(Date date) {
+    public static String toTimeFormat(Calendar calendar) {
         SimpleDateFormat sdf = new SimpleDateFormat(Constants.FORMAT_TIME, Locale.US);
-        return sdf.format(date);
+        return sdf.format(calendar.getTime());
     }
 
     // constructor
