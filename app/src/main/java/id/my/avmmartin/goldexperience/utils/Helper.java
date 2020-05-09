@@ -46,6 +46,19 @@ public class Helper {
         return sdf.format(calendar.getTime());
     }
 
+    public static String getFormattedDate(Calendar date, Calendar time) {
+        return toDateFormat(date) + " " + toTimeFormat(time);
+    }
+
+    public static Calendar getEndOfToday() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+
+        return calendar;
+    }
+
     // constructor
 
     private Helper() {
