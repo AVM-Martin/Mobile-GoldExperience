@@ -21,9 +21,15 @@ public class DeletePlanDialog extends DialogFragment {
     private DeletePlanDialog.Listener listener;
     private Plan plan;
 
-    public void setDatas(Plan plan) {
+    public void bindData(Plan plan) {
         this.plan = plan;
     }
+
+    public Plan getPlan() {
+        return plan;
+    }
+
+    // overridden method
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -56,11 +62,5 @@ public class DeletePlanDialog extends DialogFragment {
         });
 
         return builder.create();
-    }
-
-    // getter
-
-    public Plan getPlan() {
-        return plan;
     }
 }

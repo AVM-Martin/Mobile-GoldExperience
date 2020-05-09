@@ -3,6 +3,7 @@ package id.my.avmmartin.goldexperience.activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 
+import androidx.annotation.CallSuper;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -23,6 +24,7 @@ import id.my.avmmartin.goldexperience.utils.Helper;
 
 abstract class ProfileForm extends AppCompatActivity {
     protected GoldExperience mainApp;
+
     private EditText etEmail;
     private EditText etPassword;
     private EditText etFullName;
@@ -30,69 +32,10 @@ abstract class ProfileForm extends AppCompatActivity {
     private EditText etPhone;
     private Spinner spUserType;
     private RadioGroup rdSex;
+
     private Calendar calendar;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        initComponents();
-        setEvents();
-    }
-
-    private void initComponents() {
-        mainApp = (GoldExperience)this.getApplication();
-        etEmail = findViewById(R.id.t_profile_et_email);
-        etPassword = findViewById(R.id.t_profile_et_password);
-        etFullName = findViewById(R.id.t_profile_et_fullname);
-        etBirthday = findViewById(R.id.t_profile_et_birthday);
-        etPhone = findViewById(R.id.t_profile_et_phone);
-        spUserType = findViewById(R.id.t_profile_sp_usertype);
-        rdSex = findViewById(R.id.t_profile_rd_sex);
-        calendar = Calendar.getInstance();
-    }
-
-    private void setEvents() {
-        etBirthday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                etBirthdayOnClick(view);
-            }
-        });
-    }
-
-    protected void loadData(User user) {
-        etEmail.setText(user.getEmail());
-        etPassword.setText("");
-        etFullName.setText(user.getFullName());
-        etBirthday.setText(Helper.toDateFormat(user.getBirthday()));
-        etPhone.setText(user.getPhone());
-        spUserType.setSelection(user.isUserTypeVIP() ? 1 : 0);
-        ((RadioButton) rdSex.getChildAt(user.isSexMale() ? 1 : 2)).setChecked(true);
-
-        calendar.setTimeInMillis(user.getBirthday().getTimeInMillis());
-    }
-
-    private void etBirthdayOnClick(View view) {
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-            this,
-            new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int month, int day) {
-                    calendar.set(Calendar.YEAR, year);
-                    calendar.set(Calendar.MONTH, month);
-                    calendar.set(Calendar.DAY_OF_MONTH, day);
-                    etBirthday.setText(Helper.toDateFormat(calendar));
-                }
-            },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
-        );
-        datePickerDialog.show();
-    }
-
-    protected User getUser() throws EmptyEntryException, InvalidEntryException {
+    protected User getUserFromEntry() throws EmptyEntryException, InvalidEntryException {
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
         String fullName = etFullName.getText().toString();
@@ -132,5 +75,78 @@ abstract class ProfileForm extends AppCompatActivity {
         }
 
         return new User(-1, email, password, fullName, birthday, phone, userTypeVIP, sexMale);
+    }
+
+    protected void loadData(User user) {
+        etEmail.setText(user.getEmail());
+        etPassword.setText("");
+        etFullName.setText(user.getFullName());
+        etBirthday.setText(Helper.toDateFormat(user.getBirthday()));
+        etPhone.setText(user.getPhone());
+        spUserType.setSelection(user.isUserTypeVIP() ? 1 : 0);
+        ((RadioButton) rdSex.getChildAt(user.isSexMale() ? 1 : 2)).setChecked(true);
+
+        calendar.setTimeInMillis(user.getBirthday().getTimeInMillis());
+    }
+
+    // event activity
+
+    private void etBirthdayOnClick(View view) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+            ProfileForm.this,
+            new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int day) {
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, month);
+                    calendar.set(Calendar.DATE, day);
+                    etBirthday.setText(Helper.toDateFormat(calendar));
+                }
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DATE)
+        );
+        datePickerDialog.show();
+    }
+
+    // overridden method
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        initComponents();
+        setEvents();
+    }
+
+    @CallSuper
+    protected void initComponents() {
+        mainApp = (GoldExperience) getApplication();
+
+        etEmail = findViewById(R.id.t_profile_et_email);
+        etPassword = findViewById(R.id.t_profile_et_password);
+        etFullName = findViewById(R.id.t_profile_et_fullname);
+        etBirthday = findViewById(R.id.t_profile_et_birthday);
+        etPhone = findViewById(R.id.t_profile_et_phone);
+        spUserType = findViewById(R.id.t_profile_sp_usertype);
+        rdSex = findViewById(R.id.t_profile_rd_sex);
+
+        calendar = Calendar.getInstance();
+    }
+
+    @CallSuper
+    protected void setEvents() {
+        etBirthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etBirthdayOnClick(view);
+            }
+        });
     }
 }

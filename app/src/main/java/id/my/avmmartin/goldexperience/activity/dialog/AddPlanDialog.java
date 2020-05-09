@@ -27,12 +27,56 @@ public class AddPlanDialog extends DialogFragment {
         void btnSubmitOnClick(AddPlanDialog dialog);
     }
 
-    private AddPlanDialog.Listener listener;
     private TextView etName;
     private TextView etDate;
     private TextView etTime;
     private TextView etNote;
+
+    private AddPlanDialog.Listener listener;
     private Calendar calendar;
+
+    // event activity
+
+    private void etDateOnclick() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+            this.getContext(),
+            new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int day) {
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, month);
+                    calendar.set(Calendar.DATE, day);
+                    etDate.setText(Helper.toDateFormat(calendar));
+                }
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DATE)
+        );
+
+        datePickerDialog.show();
+    }
+
+    private void etTimeOnclick() {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+            this.getContext(),
+            new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                    calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    calendar.set(Calendar.MINUTE, minute);
+                    etTime.setText(Helper.toTimeFormat(calendar));
+                }
+            },
+            calendar.get(Calendar.HOUR_OF_DAY),
+            calendar.get(Calendar.MINUTE),
+            true
+        );
+
+        timePickerDialog.show();
+    }
+
+    // overridden method
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -52,22 +96,24 @@ public class AddPlanDialog extends DialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_add_plan, null);
+
         etName = view.findViewById(R.id.addplan_et_name);
         etDate = view.findViewById(R.id.addplan_et_date);
         etTime = view.findViewById(R.id.addplan_et_time);
         etNote = view.findViewById(R.id.addplan_et_note);
+
         calendar = Calendar.getInstance();
 
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                etDateOnclick(view);
+                etDateOnclick();
             }
         });
         etTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                etTimeOnclick(view);
+                etTimeOnclick();
             }
         });
 
@@ -86,43 +132,6 @@ public class AddPlanDialog extends DialogFragment {
         });
 
         return builder.create();
-    }
-
-    private void etDateOnclick(View view) {
-        DatePickerDialog date_picker_dialog = new DatePickerDialog(
-            this.getContext(),
-            new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int month, int day) {
-                    calendar.set(Calendar.YEAR, year);
-                    calendar.set(Calendar.MONTH, month);
-                    calendar.set(Calendar.DAY_OF_MONTH, day);
-                    etDate.setText(Helper.toDateFormat(calendar));
-                }
-            },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
-        );
-        date_picker_dialog.show();
-    }
-
-    private void etTimeOnclick(View view) {
-        TimePickerDialog time_picker_dialog = new TimePickerDialog(
-            this.getContext(),
-            new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                    calendar.set(Calendar.MINUTE, minute);
-                    etTime.setText(Helper.toTimeFormat(calendar));
-                }
-            },
-            calendar.get(Calendar.HOUR_OF_DAY),
-            calendar.get(Calendar.MINUTE),
-            true
-        );
-        time_picker_dialog.show();
     }
 
     // getter

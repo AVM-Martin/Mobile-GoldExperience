@@ -15,53 +15,63 @@ import id.my.avmmartin.goldexperience.data.model.Plan;
 
 public class PlanListActivity extends AppCompatActivity implements DeletePlanDialog.Listener {
     private GoldExperience mainApp;
+
     private RecyclerView rvPlanData;
 
     private PlanListAdapter adapter;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_plan_list);
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        getSupportActionBar().setTitle(R.string.title_plan_list);
-        initComponents();
-        loadData();
-    }
-
-    private void initComponents() {
-        mainApp = (GoldExperience) this.getApplication();
-        rvPlanData = findViewById(R.id.planlist_rv_plandata);
-    }
-
-    private void loadData() {
-        adapter = new PlanListAdapter(this);
-        adapter.setItemListener(new PlanListListener() {
-            @Override
-            public void btnDeleteOnClick(Plan plan) {
-                planListAdapterBtnDeleteOnClick(plan);
-            }
-        });
-
-        rvPlanData.setLayoutManager(new LinearLayoutManager(this));
-        rvPlanData.setAdapter(adapter);
-    }
+    // event activity
 
     public void planListAdapterBtnDeleteOnClick(Plan plan) {
         // TODO: please check this item
         DeletePlanDialog dialog = new DeletePlanDialog();
-        dialog.setDatas(plan);
+        dialog.bindData(plan);
         dialog.show(getSupportFragmentManager(), "");
     }
 
     @Override
     public void btnSubmitOnClick(DeletePlanDialog dialog) {
         mainApp.getDataManager().deletePlanById(dialog.getPlan().getId());
+        adapter.notifyDataSetChanged();
+    }
+
+    // overridden method
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_plan_list);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        initComponents();
         loadData();
+        setEvents();
+        getSupportActionBar().setTitle(R.string.title_plan_list);
+    }
+
+    private void initComponents() {
+        mainApp = (GoldExperience) getApplication();
+
+        rvPlanData = findViewById(R.id.planlist_rv_plandata);
+
+        adapter = new PlanListAdapter(PlanListActivity.this);
+    }
+
+    private void loadData() {
+        rvPlanData.setLayoutManager(new LinearLayoutManager(PlanListActivity.this));
+        rvPlanData.setAdapter(adapter);
+    }
+
+    private void setEvents() {
+        adapter.setItemListener(new PlanListListener() {
+            @Override
+            public void btnDeleteOnClick(Plan plan) {
+                planListAdapterBtnDeleteOnClick(plan);
+            }
+        });
     }
 }

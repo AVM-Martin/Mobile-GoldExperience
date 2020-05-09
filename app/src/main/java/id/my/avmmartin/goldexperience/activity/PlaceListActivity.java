@@ -20,16 +20,46 @@ import id.my.avmmartin.goldexperience.utils.LoadDataIndicator;
 
 public class PlaceListActivity extends AppCompatActivity {
     private GoldExperience mainApp;
+
     private RecyclerView rvPlaceData;
     private BottomNavigationView bottomNav;
 
     private LoadDataIndicator loadDataIndicator;
     private PlaceListAdapter adapter;
 
+    // event activity
+
+    private void bottomNavMyPlanOnClick() {
+        Intent intent = new Intent(PlaceListActivity.this, PlanListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void bottomNavProfileOnClick() {
+        Intent intent = new Intent(PlaceListActivity.this, ProfileActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void rvPlaceDataItemOnClick(int placeId) {
+        Intent intent = new Intent(PlaceListActivity.this, PlaceDetailActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constants.INTENT_PLACE_ID, placeId);
+        startActivity(intent);
+    }
+
+    // overridden method
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_place_list);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_place_list);
+
+        if (!((GoldExperience) getApplication()).getDataManager().isLoggedIn()) {
+            Intent intent = new Intent(PlaceListActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -40,12 +70,6 @@ public class PlaceListActivity extends AppCompatActivity {
         loadData();
         setEvents();
         getSupportActionBar().setTitle(R.string.title_place_list);
-
-        if (!mainApp.getDataManager().isLoggedIn()) {
-            Intent intent = new Intent(PlaceListActivity.this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-        }
     }
 
     @Override
@@ -56,14 +80,16 @@ public class PlaceListActivity extends AppCompatActivity {
     }
 
     private void initComponents() {
-        mainApp = (GoldExperience) this.getApplication();
+        mainApp = (GoldExperience) getApplication();
+
         rvPlaceData = findViewById(R.id.placelist_rv_placedata);
         bottomNav = findViewById(R.id.placelist_bottomnav);
 
         loadDataIndicator = new LoadDataIndicator(PlaceListActivity.this);
+        adapter = new PlaceListAdapter(PlaceListActivity.this);
     }
 
-    public void loadData() {
+    private void loadData() {
         loadDataIndicator.setListener(new LoadDataIndicator.Listener() {
             @Override
             public void loadData() {
@@ -71,15 +97,7 @@ public class PlaceListActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new PlaceListAdapter(this);
-        adapter.setListener(new PlaceListListener() {
-            @Override
-            public void onItemClick(int placeId) {
-                rvPlaceDataItemOnClick(placeId);
-            }
-        });
-
-        rvPlaceData.setLayoutManager(new LinearLayoutManager(this));
+        rvPlaceData.setLayoutManager(new LinearLayoutManager(PlaceListActivity.this));
         rvPlaceData.setAdapter(adapter);
     }
 
@@ -100,24 +118,12 @@ public class PlaceListActivity extends AppCompatActivity {
                 }
             }
         );
-    }
 
-    private void bottomNavMyPlanOnClick() {
-        Intent intent = new Intent(PlaceListActivity.this, PlanListActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
-    private void bottomNavProfileOnClick() {
-        Intent intent = new Intent(PlaceListActivity.this, ProfileActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
-    private void rvPlaceDataItemOnClick(int placeId) {
-        Intent intent = new Intent(PlaceListActivity.this, PlaceDetailActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(Constants.INTENT_PLACE_ID, placeId);
-        startActivity(intent);
+        adapter.setListener(new PlaceListListener() {
+            @Override
+            public void onItemClick(int placeId) {
+                rvPlaceDataItemOnClick(placeId);
+            }
+        });
     }
 }

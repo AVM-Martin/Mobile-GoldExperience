@@ -19,47 +19,19 @@ public class RegisterActivity extends ProfileForm {
     private Button btnLogin;
     private Button btnRegister;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_register);
-        super.onCreate(savedInstanceState);
+    // event activity
 
-        initComponents();
-        setEvents();
-    }
-
-    private void initComponents() {
-        cbTNC = findViewById(R.id.register_cb_tnc);
-        btnLogin = findViewById(R.id.register_btn_login);
-        btnRegister = findViewById(R.id.register_btn_register);
-    }
-
-    private void setEvents() {
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnLoginOnClick(view);
-            }
-        });
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnRegisterOnClick(view);
-            }
-        });
-    }
-
-    private void btnLoginOnClick(View view) {
+    private void btnLoginOnClick() {
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
-    private void btnRegisterOnClick(View view) {
+    private void btnRegisterOnClick() {
         boolean tnc = cbTNC.isChecked();
 
         try {
-            User user = super.getUser();
+            User user = super.getUserFromEntry();
 
             if (!tnc) {
                 throw new EmptyEntryException(R.string.warning_tnc_checked);
@@ -77,5 +49,40 @@ public class RegisterActivity extends ProfileForm {
         } catch (InvalidEntryException e) {
             Toast.makeText(RegisterActivity.this, getString(e.getErrorId()), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // overridden method
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+    }
+
+    @Override
+    protected void initComponents() {
+        super.initComponents();
+
+        cbTNC = findViewById(R.id.register_cb_tnc);
+        btnLogin = findViewById(R.id.register_btn_login);
+        btnRegister = findViewById(R.id.register_btn_register);
+    }
+
+    @Override
+    protected void setEvents() {
+        super.setEvents();
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnLoginOnClick();
+            }
+        });
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnRegisterOnClick();
+            }
+        });
     }
 }

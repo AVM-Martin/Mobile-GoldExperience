@@ -19,6 +19,7 @@ import id.my.avmmartin.goldexperience.utils.Constants;
 
 public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDialog.Listener {
     private GoldExperience mainApp;
+
     private TextView tvName;
     private RatingBar rbRating;
     private TextView tvDescription;
@@ -26,43 +27,9 @@ public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDia
 
     private Place place;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_place_detail);
-        super.onCreate(savedInstanceState);
+    // event activity
 
-        initComponents();
-        loadDatas();
-        setEvents();
-    }
-
-    private void initComponents() {
-        mainApp = (GoldExperience) this.getApplication();
-        tvName = findViewById(R.id.placedetail_tv_name);
-        rbRating = findViewById(R.id.placedetail_rb_rating);
-        tvDescription = findViewById(R.id.placedetail_tv_description);
-        btnAddPlace = findViewById(R.id.placedetail_btn_addplace);
-
-        int placeId = getIntent().getIntExtra(Constants.INTENT_PLACE_ID, -1);
-        place = mainApp.getDataManager().getPlace(placeId);
-    }
-
-    private void loadDatas() {
-        tvName.setText(place.getName());
-        rbRating.setRating(place.getRating());
-        tvDescription.setText(place.getDesc());
-    }
-
-    private void setEvents() {
-        btnAddPlace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnAddPlanOnClick(view);
-            }
-        });
-    }
-
-    private void btnAddPlanOnClick(View view) {
+    private void btnAddPlanOnClick() {
         AddPlanDialog dialog = new AddPlanDialog();
         dialog.show(getSupportFragmentManager(), "");
     }
@@ -74,8 +41,54 @@ public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDia
         Calendar time = dialog.getCalendar();
         String note = dialog.getEtNote().getText().toString();
 
+        // TODO: validate data
+
         int userId = mainApp.getDataManager().getAppUserId();
         Plan plan = new Plan(-1, place.getId(), userId, name, date, time, note);
         mainApp.getDataManager().insertNewPlan(plan);
+    }
+
+    // overridden method
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_place_detail);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        initComponents();
+        loadData();
+        setEvents();
+    }
+
+    private void initComponents() {
+        mainApp = (GoldExperience) getApplication();
+
+        tvName = findViewById(R.id.placedetail_tv_name);
+        rbRating = findViewById(R.id.placedetail_rb_rating);
+        tvDescription = findViewById(R.id.placedetail_tv_description);
+        btnAddPlace = findViewById(R.id.placedetail_btn_addplace);
+
+        int placeId = getIntent().getIntExtra(Constants.INTENT_PLACE_ID, -1);
+        place = mainApp.getDataManager().getPlace(placeId);
+    }
+
+    private void loadData() {
+        tvName.setText(place.getName());
+        rbRating.setRating(place.getRating());
+        tvDescription.setText(place.getDesc());
+    }
+
+    private void setEvents() {
+        btnAddPlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnAddPlanOnClick();
+            }
+        });
     }
 }

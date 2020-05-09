@@ -14,6 +14,19 @@ class PlaceListViewHolder extends RecyclerView.ViewHolder {
     private TextView tvName;
     private TextView tvDesc;
 
+    private Place data;
+
+    void bindData(Place data) {
+        this.data = data;
+    }
+
+    void loadData() {
+        tvName.setText(data.getName());
+        tvDesc.setText(data.getDesc());
+    }
+
+    // constructor
+
     private Context context;
     private PlaceListListener listener;
 
@@ -31,11 +44,6 @@ class PlaceListViewHolder extends RecyclerView.ViewHolder {
         tvDesc = itemView.findViewById(R.id.adapter_placelist_tv_desc);
     }
 
-    void loadData() {
-        tvName.setText(data.getName());
-        tvDesc.setText(data.getDesc());
-    }
-
     private void setEvents() {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,11 +51,5 @@ class PlaceListViewHolder extends RecyclerView.ViewHolder {
                 listener.onItemClick(data.getId());
             }
         });
-    }
-
-    private Place data;
-
-    void bindData(Place data) {
-        this.data = data;
     }
 }

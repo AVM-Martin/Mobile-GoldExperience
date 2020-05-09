@@ -9,8 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Calendar;
-
 import id.my.avmmartin.goldexperience.R;
 import id.my.avmmartin.goldexperience.data.model.Plan;
 import id.my.avmmartin.goldexperience.utils.Helper;
@@ -20,6 +18,24 @@ class PlanListViewHolder extends RecyclerView.ViewHolder {
     private TextView tvDatetime;
     private TextView tvNote;
     private Button btnDelete;
+
+    private Plan data;
+
+    void bindData(Plan data) {
+        this.data = data;
+    }
+
+    void loadData() {
+        tvName.setText(data.getName());
+        tvDatetime.setText(Helper.getFormattedDate(data.getDate(), data.getTime()));
+        tvNote.setText(data.getNote());
+
+        if (data.getDate().before(Helper.getEndOfToday())) {
+            itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.light_red));
+        }
+    }
+
+    // constructor
 
     private Context context;
     private PlanListListener listener;
@@ -40,16 +56,6 @@ class PlanListViewHolder extends RecyclerView.ViewHolder {
         btnDelete = itemView.findViewById(R.id.adapter_planlist_btn_delete);
     }
 
-    void loadData() {
-        tvName.setText(data.getName());
-        tvDatetime.setText(Helper.toDateFormat(data.getDate()) + " " + Helper.toTimeFormat(data.getTime()));
-        tvNote.setText(data.getNote());
-
-        if (data.getDate().before(Calendar.getInstance())) {
-             itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.light_red));
-        }
-    }
-
     private void setEvents() {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,11 +63,5 @@ class PlanListViewHolder extends RecyclerView.ViewHolder {
                 listener.btnDeleteOnClick(data);
             }
         });
-    }
-
-    private Plan data;
-
-    void bindData(Plan data) {
-        this.data = data;
     }
 }

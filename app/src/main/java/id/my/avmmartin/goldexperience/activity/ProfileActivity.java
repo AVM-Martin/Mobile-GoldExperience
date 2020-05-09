@@ -18,48 +18,11 @@ public class ProfileActivity extends ProfileForm {
 
     private User user;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_profile);
-        super.onCreate(savedInstanceState);
+    // event activity
 
-        initComponents();
-        setEvents();
-        getSupportActionBar().setTitle(R.string.title_profile);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        super.loadData(user);
-    }
-
-    private void initComponents() {
-        btnUpdate = findViewById(R.id.profile_btn_update);
-        btnLogout = findViewById(R.id.profile_btn_logout);
-        user = mainApp.getDataManager().getAppUser();
-    }
-
-    private void setEvents() {
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnUpdateOnClick(view);
-            }
-        });
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnLogoutOnClick(view);
-            }
-        });
-    }
-
-    private void btnUpdateOnClick(View view) {
+    private void btnUpdateOnClick() {
         try {
-            user = super.getUser();
-
-            mainApp.getDataManager().updateUser(user);
+            mainApp.getDataManager().updateUser(super.getUserFromEntry());
 
             Toast.makeText(ProfileActivity.this, R.string.success_update, Toast.LENGTH_SHORT).show();
             finish();
@@ -68,17 +31,59 @@ public class ProfileActivity extends ProfileForm {
             Toast.makeText(ProfileActivity.this, getString(e.getErrorId()), Toast.LENGTH_SHORT).show();
         } catch (InvalidEntryException e) {
             Toast.makeText(ProfileActivity.this, getString(e.getErrorId()), Toast.LENGTH_SHORT).show();
-        } finally {
-            user = mainApp.getDataManager().getAppUser();
         }
     }
 
-    private void btnLogoutOnClick(View view) {
+    private void btnLogoutOnClick() {
+        mainApp.getDataManager().logout();
+
         Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra(Constants.INTENT_EMAIL, user.getEmail());
-
-        mainApp.getDataManager().logout();
         startActivity(intent);
+    }
+
+    // overridden method
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        getSupportActionBar().setTitle(R.string.title_profile);
+        loadData(user);
+    }
+
+    @Override
+    protected void initComponents() {
+        super.initComponents();
+
+        btnUpdate = findViewById(R.id.profile_btn_update);
+        btnLogout = findViewById(R.id.profile_btn_logout);
+
+        user = mainApp.getDataManager().getAppUser();
+    }
+
+    @Override
+    protected void setEvents() {
+        super.setEvents();
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnUpdateOnClick();
+            }
+        });
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnLogoutOnClick();
+            }
+        });
     }
 }
