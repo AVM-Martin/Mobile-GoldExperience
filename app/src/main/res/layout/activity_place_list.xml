@@ -20,8 +20,8 @@
         app:itemTextColor="@color/white"
         app:menu="@menu/bottom_navigation" />
 
-    <ListView
-        android:id="@+id/placelist_lv_placedata"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/placelist_rv_placedata"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"

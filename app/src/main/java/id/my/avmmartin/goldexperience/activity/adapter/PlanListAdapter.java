@@ -1,52 +1,54 @@
 package id.my.avmmartin.goldexperience.activity.adapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Date;
-import java.util.Vector;
-
+import id.my.avmmartin.goldexperience.GoldExperience;
 import id.my.avmmartin.goldexperience.R;
 import id.my.avmmartin.goldexperience.data.model.Plan;
-import id.my.avmmartin.goldexperience.utils.Helper;
 
-public class PlanListAdapter extends ArrayAdapter<Plan> {
-    private TextView tvName;
-    private TextView tvDatetime;
-    private TextView tvNote;
-    private Button btnDelete;
+public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
+    private PlanListListener listener;
 
-    public PlanListAdapter(Context context, Vector<Plan> resource) {
-        super(context, R.layout.adapter_plan_list, resource);
+    public void setItemListener(PlanListListener listener) {
+        this.listener = listener;
+    }
+
+    // overridden method
+
+    @NonNull
+    @Override
+    public PlanListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(activity).inflate(R.layout.adapter_plan_list, parent, false);
+
+        return new PlanListViewHolder(v, activity, listener);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Plan plan = getItem(position);
+    public void onBindViewHolder(@NonNull PlanListViewHolder holder, int position) {
+        Plan plan = mainApp.getDataManager().getPlanByPosition(position);
 
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View view = inflater.inflate(R.layout.adapter_plan_list, null);
-        tvName = view.findViewById(R.id.adapter_planlist_tv_name);
-        tvDatetime = view.findViewById(R.id.adapter_planlist_tv_datetime);
-        tvNote = view.findViewById(R.id.adapter_planlist_tv_note);
-        btnDelete = view.findViewById(R.id.adapter_planlist_btn_delete);
+        holder.bindData(plan);
+        holder.loadData();
+    }
 
-        tvName.setText(plan.getName());
-        tvDatetime.setText(Helper.toDateFormat(plan.getDate()) + " " + Helper.toTimeFormat(plan.getTime()));
-        tvNote.setText(plan.getNote());
-        btnDelete.setTag(plan);
+    @Override
+    public int getItemCount() {
+        return mainApp.getDataManager().planSize();
+    }
 
-        if (plan.getDate().before(new Date())) {
-            view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.light_red));
-        }
+    // constructor
 
-        return view;
+    private GoldExperience mainApp;
+    private Activity activity;
+
+    public PlanListAdapter(Activity activity) {
+        this.mainApp = (GoldExperience) activity.getApplication();
+        this.activity = activity;
     }
 }

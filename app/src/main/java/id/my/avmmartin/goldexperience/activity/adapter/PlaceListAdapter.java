@@ -1,37 +1,64 @@
 package id.my.avmmartin.goldexperience.activity.adapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 import java.util.Vector;
 
+import id.my.avmmartin.goldexperience.GoldExperience;
 import id.my.avmmartin.goldexperience.R;
 import id.my.avmmartin.goldexperience.data.model.Place;
 
-public class PlaceListAdapter extends ArrayAdapter<Place> {
-    private TextView tvName;
-    private TextView tvDesc;
+public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListViewHolder> {
+    private PlaceListListener listener;
 
-    public PlaceListAdapter(Context context, Vector<Place> resource) {
-        super(context, R.layout.adapter_place_list, resource);
+    public void setListener(PlaceListListener listener) {
+        this.listener = listener;
+    }
+
+    public void setResources(List<Place> resources) {
+        this.resources = resources;
+        notifyDataSetChanged();
+    }
+
+    // overridden method
+
+    @NonNull
+    @Override
+    public PlaceListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(activity).inflate(R.layout.adapter_place_list, parent, false);
+
+        return new PlaceListViewHolder(v, activity, listener);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Place place = getItem(position);
+    public void onBindViewHolder(@NonNull PlaceListViewHolder holder, int position) {
+        Place place = resources.get(position);
 
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View view = inflater.inflate(R.layout.adapter_place_list, null);
-        tvName = view.findViewById(R.id.adapter_placelist_tv_name);
-        tvDesc = view.findViewById(R.id.adapter_placelist_tv_desc);
+        holder.bindData(place);
+        holder.loadData();
+    }
 
-        tvName.setText(place.getName());
-        tvDesc.setText(place.getDesc());
+    @Override
+    public int getItemCount() {
+        return resources.size();
+    }
 
-        return view;
+    // constructor
+
+    private GoldExperience mainApp;
+    private Activity activity;
+    private List<Place> resources;
+
+    public PlaceListAdapter(Activity activity) {
+        this.mainApp = (GoldExperience) activity.getApplication();
+        this.activity = activity;
+        this.resources = new Vector<>();
     }
 }
