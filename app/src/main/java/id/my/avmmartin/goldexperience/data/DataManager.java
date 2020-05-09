@@ -50,6 +50,10 @@ public class DataManager {
 
     // place
 
+    public void reloadOnlinePlacesData(Context context, Runnable runnable) {
+        placeManager.reloadOnlinePlacesData(context, runnable);
+    }
+
     public List<Place> getPlaces() {
         return placeManager.getPlaces();
     }
@@ -90,7 +94,6 @@ public class DataManager {
     private UserManager userManager;
 
     public DataManager(Context context) {
-        // TODO: call the JSON API at https://api.myjson.com/bins/iocic
         placeManager = new PlaceManager(context);
         planManager = new PlanManager(context);
         preferencesManager = new PreferencesManager(context);
