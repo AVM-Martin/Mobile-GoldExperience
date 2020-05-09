@@ -91,7 +91,7 @@ public class DataManager {
 
     public DataManager(Context context) {
         // TODO: call the JSON API at https://api.myjson.com/bins/iocic
-        placeManager = PlaceManager.getInstance();
+        placeManager = new PlaceManager(context);
         planManager = new PlanManager(context);
         preferencesManager = new PreferencesManager(context);
         userManager = new UserManager(context);
