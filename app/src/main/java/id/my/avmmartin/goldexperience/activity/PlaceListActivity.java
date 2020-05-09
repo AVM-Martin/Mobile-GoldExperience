@@ -16,7 +16,6 @@ import id.my.avmmartin.goldexperience.R;
 import id.my.avmmartin.goldexperience.activity.adapter.PlaceListAdapter;
 import id.my.avmmartin.goldexperience.activity.adapter.PlaceListListener;
 import id.my.avmmartin.goldexperience.utils.Constants;
-import id.my.avmmartin.goldexperience.utils.LoadDataIndicator;
 
 public class PlaceListActivity extends AppCompatActivity {
     private GoldExperience mainApp;
@@ -24,7 +23,6 @@ public class PlaceListActivity extends AppCompatActivity {
     private RecyclerView rvPlaceData;
     private BottomNavigationView bottomNav;
 
-    private LoadDataIndicator loadDataIndicator;
     private PlaceListAdapter adapter;
 
     // event activity
@@ -76,7 +74,15 @@ public class PlaceListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        loadDataIndicator.execute();
+        mainApp.getDataManager().reloadOnlinePlacesData(
+            PlaceListActivity.this,
+            new Runnable() {
+                @Override
+                public void run() {
+                    adapter.setResources(mainApp.getDataManager().getPlaces());
+                }
+            }
+        );
     }
 
     private void initComponents() {
@@ -85,18 +91,10 @@ public class PlaceListActivity extends AppCompatActivity {
         rvPlaceData = findViewById(R.id.placelist_rv_placedata);
         bottomNav = findViewById(R.id.placelist_bottomnav);
 
-        loadDataIndicator = new LoadDataIndicator(PlaceListActivity.this);
         adapter = new PlaceListAdapter(PlaceListActivity.this);
     }
 
     private void loadData() {
-        loadDataIndicator.setListener(new LoadDataIndicator.Listener() {
-            @Override
-            public void loadData() {
-                adapter.setResources(mainApp.getDataManager().getPlaces());
-            }
-        });
-
         rvPlaceData.setLayoutManager(new LinearLayoutManager(PlaceListActivity.this));
         rvPlaceData.setAdapter(adapter);
     }
