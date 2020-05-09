@@ -11,8 +11,6 @@ import id.my.avmmartin.goldexperience.exception.InvalidCredentialsException;
 import id.my.avmmartin.goldexperience.exception.UserNotFoundException;
 import id.my.avmmartin.goldexperience.utils.Constants;
 
-import static java.lang.Thread.sleep;
-
 public class DataManager {
     public void register(User user) {
         // TODO: welcome message via SMS
@@ -47,7 +45,7 @@ public class DataManager {
     }
 
     public User getAppUser() {
-        return getUserById(getAppUserId());
+        return userManager.getUserById(getAppUserId());
     }
 
     // place
@@ -79,10 +77,6 @@ public class DataManager {
     }
 
     // user
-
-    public User getUserById(int userId) {
-        return userManager.getUserById(userId);
-    }
 
     public void updateUser(User user) {
         userManager.updateUser(user);
