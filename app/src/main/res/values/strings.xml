@@ -34,6 +34,7 @@
     <string name="warning_tnc_checked">Please check the Terms and Condition</string>
     <string name="warning_not_match_account">This account does not match to our data</string>
 
+    <string name="general_error">Unknown Error</string>
     <string name="load_data">Loading items..</string>
     <string name="success_update">Profile updated</string>
 
