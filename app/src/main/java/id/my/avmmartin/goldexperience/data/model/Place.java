@@ -1,9 +1,21 @@
 package id.my.avmmartin.goldexperience.data.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import id.my.avmmartin.goldexperience.data.PlaceManager;
+
 public class Place {
+    private static final String ID = PlaceManager.ID;
+    private static final String NAME = PlaceManager.NAME;
+    private static final String DESCRIPTION = PlaceManager.DESCRIPTION;
+    private static final String RATING = PlaceManager.RATING;
+    private static final String LATITUDE = PlaceManager.LATITUDE;
+    private static final String LONGITUDE = PlaceManager.LONGITUDE;
+
     private int id;
     private String name;
-    private int rating;
+    private double rating;
     private String desc;
     private double longitude;
     private double latitude;
@@ -24,6 +36,15 @@ public class Place {
         setLatitude(latitude);
     }
 
+    public Place(JSONObject jsonObject) throws JSONException {
+        setId(jsonObject.getInt(ID));
+        setName(jsonObject.getString(NAME));
+        setRating(jsonObject.getDouble(RATING));
+        setDesc(jsonObject.getString(DESCRIPTION));
+        setLongitude(jsonObject.getDouble(LONGITUDE));
+        setLatitude(jsonObject.getDouble(LATITUDE));
+    }
+
     // getter
 
     public int getId() {
@@ -34,7 +55,7 @@ public class Place {
         return name;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
@@ -60,7 +81,7 @@ public class Place {
         this.name = name;
     }
 
-    private void setRating(int rating) {
+    private void setRating(double rating) {
         this.rating = rating;
     }
 

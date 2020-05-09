@@ -79,7 +79,7 @@ public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDia
 
     private void loadData() {
         tvName.setText(place.getName());
-        rbRating.setRating(place.getRating());
+        rbRating.setRating((float) place.getRating());
         tvDescription.setText(place.getDesc());
     }
 
