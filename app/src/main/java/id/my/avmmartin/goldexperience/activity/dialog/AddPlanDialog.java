@@ -20,7 +20,7 @@ import androidx.fragment.app.DialogFragment;
 import java.util.Calendar;
 
 import id.my.avmmartin.goldexperience.R;
-import id.my.avmmartin.goldexperience.utils.Helper;
+import id.my.avmmartin.goldexperience.utils.CalendarUtils;
 
 public class AddPlanDialog extends DialogFragment {
     public interface Listener {
@@ -46,7 +46,7 @@ public class AddPlanDialog extends DialogFragment {
                     calendar.set(Calendar.YEAR, year);
                     calendar.set(Calendar.MONTH, month);
                     calendar.set(Calendar.DATE, day);
-                    etDate.setText(Helper.toDateFormat(calendar));
+                    etDate.setText(CalendarUtils.toDateFormat(calendar));
                 }
             },
             calendar.get(Calendar.YEAR),
@@ -65,7 +65,7 @@ public class AddPlanDialog extends DialogFragment {
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                     calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     calendar.set(Calendar.MINUTE, minute);
-                    etTime.setText(Helper.toTimeFormat(calendar));
+                    etTime.setText(CalendarUtils.toTimeFormat(calendar));
                 }
             },
             calendar.get(Calendar.HOUR_OF_DAY),

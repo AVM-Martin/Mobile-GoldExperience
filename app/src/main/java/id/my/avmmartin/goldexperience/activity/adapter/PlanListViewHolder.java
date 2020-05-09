@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import id.my.avmmartin.goldexperience.R;
 import id.my.avmmartin.goldexperience.data.model.Plan;
-import id.my.avmmartin.goldexperience.utils.Helper;
+import id.my.avmmartin.goldexperience.utils.CalendarUtils;
 
 class PlanListViewHolder extends RecyclerView.ViewHolder {
     private TextView tvName;
@@ -27,10 +27,10 @@ class PlanListViewHolder extends RecyclerView.ViewHolder {
 
     void loadData() {
         tvName.setText(data.getName());
-        tvDatetime.setText(Helper.getFormattedDate(data.getDate(), data.getTime()));
+        tvDatetime.setText(CalendarUtils.getFormattedDate(data.getDate(), data.getTime()));
         tvNote.setText(data.getNote());
 
-        if (data.getDate().before(Helper.getEndOfToday())) {
+        if (data.getDate().before(CalendarUtils.getEndOfToday())) {
             itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.light_red));
         }
     }

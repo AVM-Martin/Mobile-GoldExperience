@@ -6,7 +6,7 @@ import android.database.Cursor;
 import java.util.Calendar;
 
 import id.my.avmmartin.goldexperience.data.PlanManager;
-import id.my.avmmartin.goldexperience.utils.Helper;
+import id.my.avmmartin.goldexperience.utils.CalendarUtils;
 
 public class Plan {
     private static final String ID = PlanManager.ID;
@@ -29,7 +29,7 @@ public class Plan {
     public String toString() {
         return (
             getName() + "\n"
-                + Helper.toDateFormat(getDate()) + " " + Helper.toTimeFormat(getTime()) + "\n"
+                + CalendarUtils.getFormattedDate(getDate(), getTime()) + "\n"
                 + note
         );
     }

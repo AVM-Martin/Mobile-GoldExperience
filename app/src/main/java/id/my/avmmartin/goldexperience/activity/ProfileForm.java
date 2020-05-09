@@ -20,7 +20,8 @@ import id.my.avmmartin.goldexperience.R;
 import id.my.avmmartin.goldexperience.data.model.User;
 import id.my.avmmartin.goldexperience.exception.EmptyEntryException;
 import id.my.avmmartin.goldexperience.exception.InvalidEntryException;
-import id.my.avmmartin.goldexperience.utils.Helper;
+import id.my.avmmartin.goldexperience.utils.CalendarUtils;
+import id.my.avmmartin.goldexperience.utils.ValidationUtils;
 
 abstract class ProfileForm extends AppCompatActivity {
     protected GoldExperience mainApp;
@@ -46,13 +47,13 @@ abstract class ProfileForm extends AppCompatActivity {
 
         if (email.equals("")) {
             throw new EmptyEntryException(R.string.warning_email_filled);
-        } else if (!Helper.isValidEmail(email)) {
+        } else if (!ValidationUtils.isValidEmail(email)) {
             throw new InvalidEntryException(R.string.warning_email_invalid);
         }
 
         if (password.equals("")) {
             throw new EmptyEntryException(R.string.warning_password_filled);
-        } else if (!Helper.isValidPassword(password)) {
+        } else if (!ValidationUtils.isValidPassword(password)) {
             throw new InvalidEntryException(R.string.warning_password_invalid);
         }
 
@@ -66,7 +67,7 @@ abstract class ProfileForm extends AppCompatActivity {
 
         if (phone.equals("")) {
             throw new EmptyEntryException(R.string.warning_phone_number_filled);
-        } else if (!Helper.isValidPhoneNumber(phone)) {
+        } else if (!ValidationUtils.isValidPhoneNumber(phone)) {
             throw new InvalidEntryException(R.string.warning_phone_number_invalid);
         }
 
@@ -81,7 +82,7 @@ abstract class ProfileForm extends AppCompatActivity {
         etEmail.setText(user.getEmail());
         etPassword.setText("");
         etFullName.setText(user.getFullName());
-        etBirthday.setText(Helper.toDateFormat(user.getBirthday()));
+        etBirthday.setText(CalendarUtils.toDateFormat(user.getBirthday()));
         etPhone.setText(user.getPhone());
         spUserType.setSelection(user.isUserTypeVIP() ? 1 : 0);
         ((RadioButton) rdSex.getChildAt(user.isSexMale() ? 1 : 2)).setChecked(true);
@@ -91,7 +92,7 @@ abstract class ProfileForm extends AppCompatActivity {
 
     // event activity
 
-    private void etBirthdayOnClick(View view) {
+    private void etBirthdayOnClick() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
             ProfileForm.this,
             new DatePickerDialog.OnDateSetListener() {
@@ -100,7 +101,7 @@ abstract class ProfileForm extends AppCompatActivity {
                     calendar.set(Calendar.YEAR, year);
                     calendar.set(Calendar.MONTH, month);
                     calendar.set(Calendar.DATE, day);
-                    etBirthday.setText(Helper.toDateFormat(calendar));
+                    etBirthday.setText(CalendarUtils.toDateFormat(calendar));
                 }
             },
             calendar.get(Calendar.YEAR),
@@ -145,7 +146,7 @@ abstract class ProfileForm extends AppCompatActivity {
         etBirthday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                etBirthdayOnClick(view);
+                etBirthdayOnClick();
             }
         });
     }
