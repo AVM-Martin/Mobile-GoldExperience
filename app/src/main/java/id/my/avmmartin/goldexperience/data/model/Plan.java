@@ -25,15 +25,6 @@ public class Plan {
     private Calendar time;
     private String note;
 
-    @Override
-    public String toString() {
-        return (
-            getName() + "\n"
-                + CalendarUtils.getFormattedDate(getDate(), getTime()) + "\n"
-                + note
-        );
-    }
-
     // database-related method
 
     public Plan(Cursor cursor) {
