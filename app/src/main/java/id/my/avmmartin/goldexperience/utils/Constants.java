@@ -16,6 +16,8 @@ public class Constants {
     public static final String JSON_URL_PLACE =
         "https://raw.githubusercontent.com/dnzrx/SLC-REPO/master/MOBI6021/E202-MOBI6021-MQ01-00.json";
 
+    public static final double GMAPS_ZOOM_LEVEL = 5.5;
+
     // constructor
 
     private Constants() {
