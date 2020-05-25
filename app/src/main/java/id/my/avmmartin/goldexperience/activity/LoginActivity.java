@@ -30,11 +30,11 @@ public class LoginActivity extends AppCompatActivity {
         String password = etPassword.getText().toString();
 
         try {
-            if (email.equals("")) {
+            if (email.isEmpty()) {
                 throw new EmptyEntryException(R.string.warning_email_filled);
             }
 
-            if (password.equals("")) {
+            if (password.isEmpty()) {
                 throw new EmptyEntryException(R.string.warning_password_filled);
             }
 

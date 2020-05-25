@@ -45,27 +45,27 @@ abstract class ProfileForm extends AppCompatActivity {
         boolean userTypeVIP = spUserType.getSelectedItem().toString().contains("VIP");
         boolean sexMale = rdSex.getCheckedRadioButtonId() == R.id.t_profile_rd_sex_male;
 
-        if (email.equals("")) {
+        if (email.isEmpty()) {
             throw new EmptyEntryException(R.string.warning_email_filled);
         } else if (!ValidationUtils.isValidEmail(email)) {
             throw new InvalidEntryException(R.string.warning_email_invalid);
         }
 
-        if (password.equals("")) {
+        if (password.isEmpty()) {
             throw new EmptyEntryException(R.string.warning_password_filled);
         } else if (!ValidationUtils.isValidPassword(password)) {
             throw new InvalidEntryException(R.string.warning_password_invalid);
         }
 
-        if (fullName.equals("")) {
+        if (fullName.isEmpty()) {
             throw new EmptyEntryException(R.string.warning_full_name_filled);
         }
 
-        if (etBirthday.getText().toString().equals("")) {
+        if (etBirthday.getText().toString().isEmpty()) {
             throw new EmptyEntryException(R.string.warning_birthday_filled);
         }
 
-        if (phone.equals("")) {
+        if (phone.isEmpty()) {
             throw new EmptyEntryException(R.string.warning_phone_number_filled);
         } else if (!ValidationUtils.isValidPhoneNumber(phone)) {
             throw new InvalidEntryException(R.string.warning_phone_number_invalid);
