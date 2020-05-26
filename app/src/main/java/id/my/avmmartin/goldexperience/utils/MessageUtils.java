@@ -47,21 +47,35 @@ public class MessageUtils {
         confirmationCode = Integer.toString(new Random().nextInt(10000));
     }
 
-    // public method
-
-    public void sendConfirmationCode(String phoneNumber) {
-        generateConfirmationCode();
-
+    private void sendMessage(String phoneNumber, String message) {
         smsManager.sendTextMessage(
             phoneNumber,
             null,
-            "Your Gold Experience confirmation code is " + confirmationCode + ".",
+            message,
             null,
             null
         );
     }
 
+    // public method
+
+    public void sendConfirmationCode(String phoneNumber) {
+        generateConfirmationCode();
+
+        sendMessage(
+            phoneNumber,
+            "Your Gold Experience confirmation code is " + confirmationCode + "."
+        );
+    }
+
     public boolean confirmCode(String code) {
         return confirmationCode.equals(code);
+    }
+
+    public void welcomeMessage(String fullname, String phoneNumber) {
+        sendMessage(
+            phoneNumber,
+            "Hi " + fullname + ". Your Gold Experience account is registered!"
+        );
     }
 }
