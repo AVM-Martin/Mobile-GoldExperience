@@ -18,7 +18,33 @@ public class MessageUtils {
 
     private static MessageUtils instance = new MessageUtils();
 
-    public static MessageUtils getInstance(Activity activity) {
+    public static MessageUtils getInstance() {
+        return instance;
+    }
+
+    private MessageUtils() {
+        smsManager = SmsManager.getDefault();
+    }
+
+    // private method
+
+    private void generateConfirmationCode() {
+        confirmationCode = Integer.toString(new Random().nextInt(10000));
+    }
+
+    private void sendMessage(String phoneNumber, String message) throws SecurityException {
+        smsManager.sendTextMessage(
+            phoneNumber,
+            null,
+            message,
+            null,
+            null
+        );
+    }
+
+    // public method
+
+    public void requestPermission(Activity activity) {
         int sendSMSPermission = ContextCompat.checkSelfPermission(
             activity,
             Manifest.permission.SEND_SMS
@@ -33,33 +59,9 @@ public class MessageUtils {
                 1
             );
         }
-
-        return instance;
     }
 
-    private MessageUtils() {
-        smsManager = SmsManager.getDefault();
-    }
-
-    // private method
-
-    private void generateConfirmationCode() {
-        confirmationCode = Integer.toString(new Random().nextInt(10000));
-    }
-
-    private void sendMessage(String phoneNumber, String message) {
-        smsManager.sendTextMessage(
-            phoneNumber,
-            null,
-            message,
-            null,
-            null
-        );
-    }
-
-    // public method
-
-    public void sendConfirmationCode(String phoneNumber) {
+    public void sendConfirmationCode(String phoneNumber) throws SecurityException {
         generateConfirmationCode();
 
         sendMessage(
@@ -72,7 +74,7 @@ public class MessageUtils {
         return confirmationCode.equals(code);
     }
 
-    public void welcomeMessage(String fullname, String phoneNumber) {
+    public void welcomeMessage(String fullname, String phoneNumber) throws SecurityException {
         sendMessage(
             phoneNumber,
             "Hi " + fullname + ". Your Gold Experience account is registered!"
