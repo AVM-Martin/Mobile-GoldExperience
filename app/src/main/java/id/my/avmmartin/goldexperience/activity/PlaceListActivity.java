@@ -53,12 +53,6 @@ public class PlaceListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_list);
-
-        if (!((GoldExperience) getApplication()).getDataManager().isLoggedIn()) {
-            Intent intent = new Intent(PlaceListActivity.this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-        }
     }
 
     @Override
@@ -75,18 +69,25 @@ public class PlaceListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        ProgressDialog progressDialog = new ProgressDialog(PlaceListActivity.this);
-        progressDialog.setMessage(getString(R.string.load_data));
+        if (!mainApp.getDataManager().isLoggedIn()) {
+            Intent intent = new Intent(PlaceListActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
 
-        mainApp.getDataManager().reloadOnlinePlacesData(
-            progressDialog,
-            new Runnable() {
-                @Override
-                public void run() {
-                    adapter.setResources(mainApp.getDataManager().getPlaces());
+        } else {
+            ProgressDialog progressDialog = new ProgressDialog(PlaceListActivity.this);
+            progressDialog.setMessage(getString(R.string.load_data));
+
+            mainApp.getDataManager().reloadOnlinePlacesData(
+                progressDialog,
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.setResources(mainApp.getDataManager().getPlaces());
+                    }
                 }
-            }
-        );
+            );
+        }
     }
 
     private void initComponents() {
