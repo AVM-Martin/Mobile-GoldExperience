@@ -85,7 +85,9 @@ public class AddPlanDialog extends DialogFragment {
         try {
             listener = (AddPlanDialog.Listener)context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().toString() + " must implement AddPlanDialog.Listener");
+            throw new ClassCastException(
+                getActivity().toString() + " must implement AddPlanDialog.Listener"
+            );
         }
     }
 

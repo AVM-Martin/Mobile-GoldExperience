@@ -38,7 +38,9 @@ public class DeletePlanDialog extends DialogFragment {
         try {
             listener = (DeletePlanDialog.Listener)context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().toString() + " must implement DeletePlanDialog.Listener");
+            throw new ClassCastException(
+                getActivity().toString() + " must implement DeletePlanDialog.Listener"
+            );
         }
     }
 
