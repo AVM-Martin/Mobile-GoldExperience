@@ -3,10 +3,12 @@ package id.my.avmmartin.goldexperience.data;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import id.my.avmmartin.goldexperience.data.model.User;
+import id.my.avmmartin.goldexperience.exception.DuplicateUserException;
 import id.my.avmmartin.goldexperience.exception.UserNotFoundException;
 import id.my.avmmartin.goldexperience.utils.Constants;
 
@@ -25,9 +27,11 @@ public class UserManager extends SQLiteOpenHelper {
 
     // create read update
 
-    void insertNewUser(User user) {
+    void insertNewUser(User user) throws DuplicateUserException {
         try (SQLiteDatabase db = getWritableDatabase()) {
-            db.insert(TABLE_NAME, null, user.toContentValues());
+            db.insertOrThrow(TABLE_NAME, null, user.toContentValues());
+        } catch (SQLiteConstraintException e) {
+            throw new DuplicateUserException();
         }
     }
 

@@ -7,13 +7,13 @@ import java.util.List;
 import id.my.avmmartin.goldexperience.data.model.Place;
 import id.my.avmmartin.goldexperience.data.model.Plan;
 import id.my.avmmartin.goldexperience.data.model.User;
+import id.my.avmmartin.goldexperience.exception.DuplicateUserException;
 import id.my.avmmartin.goldexperience.exception.InvalidCredentialsException;
 import id.my.avmmartin.goldexperience.exception.UserNotFoundException;
 import id.my.avmmartin.goldexperience.utils.Constants;
 
 public class DataManager {
-    public void register(User user) {
-        // TODO: welcome message via SMS
+    public void register(User user) throws DuplicateUserException {
         userManager.insertNewUser(user);
     }
 
