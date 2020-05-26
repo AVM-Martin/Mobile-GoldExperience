@@ -10,15 +10,15 @@ import androidx.core.content.ContextCompat;
 
 import java.util.Random;
 
-public class ConfirmationMessageUtils {
+public class MessageUtils {
     private SmsManager smsManager;
     private String confirmationCode;
 
     // singleton style
 
-    private static ConfirmationMessageUtils instance = new ConfirmationMessageUtils();
+    private static MessageUtils instance = new MessageUtils();
 
-    public static ConfirmationMessageUtils getInstance(Activity activity) {
+    public static MessageUtils getInstance(Activity activity) {
         int sendSMSPermission = ContextCompat.checkSelfPermission(
             activity,
             Manifest.permission.SEND_SMS
@@ -37,7 +37,7 @@ public class ConfirmationMessageUtils {
         return instance;
     }
 
-    private ConfirmationMessageUtils() {
+    private MessageUtils() {
         smsManager = SmsManager.getDefault();
     }
 
