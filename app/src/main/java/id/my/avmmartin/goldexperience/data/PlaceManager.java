@@ -75,15 +75,5 @@ public class PlaceManager extends Vector<Place> {
 
     PlaceManager(Context context) {
         this.requestQueue = Volley.newRequestQueue(context);
-
-        // TODO: hard coded database
-        add(new Place(
-            1, "Potato Head", 4,
-            "The best place in Bali", -6.2000809, 106.7833355
-        ));
-        add(new Place(
-            2, "Pink Beach", 5,
-            "The best place in Lombok", -6.2261741, 106.9078293)
-        );
     }
 }
