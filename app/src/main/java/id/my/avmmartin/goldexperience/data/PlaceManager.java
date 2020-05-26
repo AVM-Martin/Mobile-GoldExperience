@@ -15,7 +15,6 @@ import org.json.JSONException;
 import java.util.List;
 import java.util.Vector;
 
-import id.my.avmmartin.goldexperience.R;
 import id.my.avmmartin.goldexperience.data.model.Place;
 import id.my.avmmartin.goldexperience.utils.Constants;
 
@@ -27,11 +26,7 @@ public class PlaceManager extends Vector<Place> {
     public static final String LATITUDE = "LAT";
     public static final String LONGITUDE = "LNG";
 
-    void reloadOnlinePlacesData(Context context, final Runnable runnable) {
-        // TODO: remove presenter from model layer
-        final ProgressDialog progressDialog = new ProgressDialog(context);
-
-        progressDialog.setMessage(context.getString(R.string.load_data));
+    void reloadOnlinePlacesData(final ProgressDialog progressDialog, final Runnable runnable) {
         progressDialog.show();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
@@ -60,7 +55,8 @@ public class PlaceManager extends Vector<Place> {
                 public void onErrorResponse(VolleyError e) {
                     progressDialog.dismiss();
                 }
-            });
+            }
+        );
 
         requestQueue.add(jsonArrayRequest);
     }

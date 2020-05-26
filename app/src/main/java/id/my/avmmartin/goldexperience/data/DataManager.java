@@ -1,5 +1,6 @@
 package id.my.avmmartin.goldexperience.data;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 
 import java.util.List;
@@ -50,8 +51,8 @@ public class DataManager {
 
     // place
 
-    public void reloadOnlinePlacesData(Context context, Runnable runnable) {
-        placeManager.reloadOnlinePlacesData(context, runnable);
+    public void reloadOnlinePlacesData(ProgressDialog progressDialog, Runnable runnable) {
+        placeManager.reloadOnlinePlacesData(progressDialog, runnable);
     }
 
     public List<Place> getPlaces() {
