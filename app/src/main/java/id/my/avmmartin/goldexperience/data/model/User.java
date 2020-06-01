@@ -5,7 +5,7 @@ import android.database.Cursor;
 
 import java.util.Calendar;
 
-import id.my.avmmartin.goldexperience.data.UserManager;
+import id.my.avmmartin.goldexperience.data.manager.UserManager;
 
 public class User {
     private static final String ID = UserManager.ID;

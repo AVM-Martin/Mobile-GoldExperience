@@ -35,6 +35,7 @@ Here a list of URLs that had been accessed and (maybe) give some insights to thi
   * https://www.journaldev.com/17899/java-simpledateformat-java-date-format
   * https://stackoverflow.com/questions/18097748/how-to-get-row-count-in-sqlite-using-android/18098603#18098603
   * https://stackoverflow.com/questions/11776356/android-sqlite-contraint-conflict-try-catch-couldnt-catch/12725468#12725468
+  * https://developer.android.com/training/data-storage/sqlite#PersistingDbConnection
 
 
 ## Useful Information

@@ -1,17 +1,14 @@
-package id.my.avmmartin.goldexperience.data;
+package id.my.avmmartin.goldexperience.data.manager;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import id.my.avmmartin.goldexperience.data.model.Plan;
-import id.my.avmmartin.goldexperience.utils.Constants;
 
-public class PlanManager extends SQLiteOpenHelper {
+public class PlanManager {
     static final String TABLE_NAME = "plans";
-    static final int VERSION = 1;
+    public static final int VERSION = 1;
 
     public static final String ID = "id";
     public static final String FK_PLACE_ID = "fk_place_id";
@@ -21,7 +18,7 @@ public class PlanManager extends SQLiteOpenHelper {
     public static final String TIME = "time";
     public static final String NOTE = "note";
 
-    int sizeByUser(int fkUserId) {
+    public int sizeByUser(int fkUserId) {
         String selection = (
             FK_USER_ID + " = ?"
         );
@@ -29,22 +26,16 @@ public class PlanManager extends SQLiteOpenHelper {
             Integer.toString(fkUserId)
         };
 
-        try (SQLiteDatabase db = getReadableDatabase()) {
-            // TODO: check this behaviour with onCreate(db);
-            onCreate(db);
-            return (int) DatabaseUtils.queryNumEntries(db, TABLE_NAME, selection, selectionArgs);
-        }
+        return (int) DatabaseUtils.queryNumEntries(db, TABLE_NAME, selection, selectionArgs);
     }
 
     // create read delete
 
-    void insertNewPlan(Plan plan) {
-        try (SQLiteDatabase db = getWritableDatabase()) {
-            db.insert(TABLE_NAME, null, plan.toContentValues());
-        }
+    public void insertNewPlan(Plan plan) {
+        db.insert(TABLE_NAME, null, plan.toContentValues());
     }
 
-    Plan getPlanByUserByPosition(int fkUserId, int position) {
+    public Plan getPlanByUserByPosition(int fkUserId, int position) {
         String selection = (
             FK_USER_ID + " = ?"
         );
@@ -52,15 +43,13 @@ public class PlanManager extends SQLiteOpenHelper {
             Integer.toString(fkUserId)
         };
 
-        try (SQLiteDatabase db = getReadableDatabase()) {
-            try (Cursor cursor = db.query(TABLE_NAME, null, selection, selectionArgs, null, null, null)) {
-                cursor.moveToPosition(position);
-                return new Plan(cursor);
-            }
+        try (Cursor cursor = db.query(TABLE_NAME, null, selection, selectionArgs, null, null, null)) {
+            cursor.moveToPosition(position);
+            return new Plan(cursor);
         }
     }
 
-    void deletePlanById(int fkUserId, int id) {
+    public void deletePlanById(int fkUserId, int id) {
         String whereClause = (
             ID + " = ?" + " AND " +
             FK_USER_ID + " = ?"
@@ -70,15 +59,12 @@ public class PlanManager extends SQLiteOpenHelper {
             Integer.toString(fkUserId)
         };
 
-        try (SQLiteDatabase db = getReadableDatabase()) {
-            db.delete(TABLE_NAME, whereClause, whereArgs);
-        }
+        db.delete(TABLE_NAME, whereClause, whereArgs);
     }
 
     // overridden method
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
+    public static void onCreate(SQLiteDatabase db) {
         db.execSQL(
             "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "("
                 + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -98,8 +84,7 @@ public class PlanManager extends SQLiteOpenHelper {
         );
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public static void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion != newVersion) {
             db.execSQL(
                 "DROP TABLE IF EXISTS " + TABLE_NAME + ";"
@@ -110,7 +95,9 @@ public class PlanManager extends SQLiteOpenHelper {
 
     // constructor
 
-    PlanManager(Context context) {
-        super(context, Constants.DB_NAME, null, VERSION);
+    private SQLiteDatabase db;
+
+    public PlanManager(SQLiteDatabase db) {
+        this.db = db;
     }
 }

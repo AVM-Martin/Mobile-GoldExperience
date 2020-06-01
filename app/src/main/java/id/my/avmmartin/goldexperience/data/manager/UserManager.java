@@ -1,20 +1,17 @@
-package id.my.avmmartin.goldexperience.data;
+package id.my.avmmartin.goldexperience.data.manager;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import id.my.avmmartin.goldexperience.data.model.User;
 import id.my.avmmartin.goldexperience.exception.DuplicateUserException;
 import id.my.avmmartin.goldexperience.exception.UserNotFoundException;
-import id.my.avmmartin.goldexperience.utils.Constants;
 
-public class UserManager extends SQLiteOpenHelper {
+public class UserManager {
     static final String TABLE_NAME = "users";
-    static final int VERSION = 1;
+    public static final int VERSION = 1;
 
     public static final String ID = "id";
     public static final String EMAIL = "email";
@@ -27,15 +24,15 @@ public class UserManager extends SQLiteOpenHelper {
 
     // create read update
 
-    void insertNewUser(User user) throws DuplicateUserException {
-        try (SQLiteDatabase db = getWritableDatabase()) {
+    public void insertNewUser(User user) throws DuplicateUserException {
+        try {
             db.insertOrThrow(TABLE_NAME, null, user.toContentValues());
         } catch (SQLiteConstraintException e) {
             throw new DuplicateUserException();
         }
     }
 
-    User getUserById(int id) {
+    public User getUserById(int id) {
         String selection = (
             ID + " = ?"
         );
@@ -43,15 +40,13 @@ public class UserManager extends SQLiteOpenHelper {
             Integer.toString(id)
         };
 
-        try (SQLiteDatabase db = getReadableDatabase()) {
-            try (Cursor cursor = db.query(TABLE_NAME, null, selection, selectionArgs, null, null, null)) {
-                cursor.moveToFirst();
-                return new User(cursor);
-            }
+        try (Cursor cursor = db.query(TABLE_NAME, null, selection, selectionArgs, null, null, null)) {
+            cursor.moveToFirst();
+            return new User(cursor);
         }
     }
 
-    User getUserByEmail(String email) throws UserNotFoundException {
+    public User getUserByEmail(String email) throws UserNotFoundException {
         String selection = (
             EMAIL + " = ?"
         );
@@ -59,19 +54,17 @@ public class UserManager extends SQLiteOpenHelper {
             email
         };
 
-        try (SQLiteDatabase db = getReadableDatabase()) {
-            try (Cursor cursor = db.query(TABLE_NAME, null, selection, selectionArgs, null, null, null)) {
-                cursor.moveToFirst();
-                return new User(cursor);
+        try (Cursor cursor = db.query(TABLE_NAME, null, selection, selectionArgs, null, null, null)) {
+            cursor.moveToFirst();
+            return new User(cursor);
 
-            } catch (CursorIndexOutOfBoundsException e) {
-                throw new UserNotFoundException();
-            }
+        } catch (CursorIndexOutOfBoundsException e) {
+            throw new UserNotFoundException();
         }
 
     }
 
-    void updateUser(User user) {
+    public void updateUser(User user) {
         String whereClause = (
             ID + " = ?"
         );
@@ -79,15 +72,12 @@ public class UserManager extends SQLiteOpenHelper {
             Integer.toString(user.getId())
         };
 
-        try (SQLiteDatabase db = getWritableDatabase()) {
-            db.update(TABLE_NAME, user.toContentValues(), whereClause, whereArgs);
-        }
+        db.update(TABLE_NAME, user.toContentValues(), whereClause, whereArgs);
     }
 
     // overridden method
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
+    public static void onCreate(SQLiteDatabase db) {
         db.execSQL(
             "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "("
                 + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -102,8 +92,7 @@ public class UserManager extends SQLiteOpenHelper {
         );
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public static void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion != newVersion) {
             db.execSQL(
                 "DROP TABLE IF EXISTS " + TABLE_NAME + ";"
@@ -114,7 +103,9 @@ public class UserManager extends SQLiteOpenHelper {
 
     // constructor
 
-    UserManager(Context context) {
-        super(context, Constants.DB_NAME, null, VERSION);
+    private SQLiteDatabase db;
+
+    public UserManager(SQLiteDatabase db) {
+        this.db = db;
     }
 }

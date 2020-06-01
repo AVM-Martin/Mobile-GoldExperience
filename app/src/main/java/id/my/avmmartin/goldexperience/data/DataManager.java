@@ -15,12 +15,12 @@ import id.my.avmmartin.goldexperience.utils.Constants;
 
 public class DataManager {
     public void register(User user) throws DuplicateUserException {
-        userManager.insertNewUser(user);
+        databaseManager.getUserManager().insertNewUser(user);
     }
 
     public void login(String email, String password) throws InvalidCredentialsException {
         try {
-            User user = userManager.getUserByEmail(email);
+            User user = databaseManager.getUserManager().getUserByEmail(email);
 
             if (!user.isValidPassword(password)) {
                 throw new InvalidCredentialsException();
@@ -46,7 +46,7 @@ public class DataManager {
     }
 
     public User getAppUser() {
-        return userManager.getUserById(getAppUserId());
+        return databaseManager.getUserManager().getUserById(getAppUserId());
     }
 
     // place
@@ -66,38 +66,38 @@ public class DataManager {
     // plan
 
     public void insertNewPlan(Plan plan) {
-        planManager.insertNewPlan(plan);
+        databaseManager.getPlanManager().insertNewPlan(plan);
     }
 
     public Plan getPlanByPosition(int position) {
-        return planManager.getPlanByUserByPosition(getAppUserId(), position);
+        return databaseManager.getPlanManager().getPlanByUserByPosition(getAppUserId(), position);
     }
 
     public int planSize() {
-        return planManager.sizeByUser(getAppUserId());
+        return databaseManager.getPlanManager().sizeByUser(getAppUserId());
     }
 
     public void deletePlanById(int planId) {
-        planManager.deletePlanById(getAppUserId(), planId);
+        databaseManager.getPlanManager().deletePlanById(getAppUserId(), planId);
     }
 
     // user
 
     public void updateUser(User user) {
-        userManager.updateUser(user);
+        databaseManager.getUserManager().updateUser(user);
     }
 
     // constructor
 
-    private PlaceManager placeManager;
-    private PlanManager planManager;
+    private DatabaseManager databaseManager;
     private PreferencesManager preferencesManager;
-    private UserManager userManager;
+
+    private PlaceManager placeManager;
 
     public DataManager(Context context) {
-        placeManager = new PlaceManager(context);
-        planManager = new PlanManager(context);
+        databaseManager = new DatabaseManager(context);
         preferencesManager = new PreferencesManager(context);
-        userManager = new UserManager(context);
+
+        placeManager = new PlaceManager(context);
     }
 }

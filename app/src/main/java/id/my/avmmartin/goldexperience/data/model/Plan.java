@@ -5,7 +5,7 @@ import android.database.Cursor;
 
 import java.util.Calendar;
 
-import id.my.avmmartin.goldexperience.data.PlanManager;
+import id.my.avmmartin.goldexperience.data.manager.PlanManager;
 
 public class Plan {
     private static final String ID = PlanManager.ID;
