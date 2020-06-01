@@ -27,8 +27,7 @@ public class Place {
 
     // constructor
 
-    public Place(int id, String name, int rating, String desc, double longitude, double latitude) {
-        setId(id);
+    public Place(String name, int rating, String desc, double longitude, double latitude) {
         setName(name);
         setRating(rating);
         setDesc(desc);

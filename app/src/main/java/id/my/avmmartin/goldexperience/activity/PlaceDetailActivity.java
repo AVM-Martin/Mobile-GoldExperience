@@ -53,7 +53,7 @@ public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDia
         // TODO: validate data
 
         int userId = mainApp.getDataManager().getAppUserId();
-        Plan plan = new Plan(-1, place.getId(), userId, name, date, time, note);
+        Plan plan = new Plan(place.getId(), userId, name, date, time, note);
         mainApp.getDataManager().insertNewPlan(plan);
     }
 

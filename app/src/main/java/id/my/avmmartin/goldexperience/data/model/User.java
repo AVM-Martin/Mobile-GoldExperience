@@ -64,7 +64,7 @@ public class User {
     // constructor
 
     public User(
-        int id, String email, String password, String fullName,
+        String email, String password, String fullName,
         Calendar birthday, String phone, boolean userTypeVIP, boolean sexMale
     ) {
         setId(id);
@@ -113,7 +113,7 @@ public class User {
 
     // setter
 
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 

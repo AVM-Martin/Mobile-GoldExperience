@@ -59,7 +59,7 @@ public class Plan {
 
     // constructor
 
-    public Plan(int id, int fkPlaceId, int fkUserId, String name, Calendar date, Calendar time, String note) {
+    public Plan(int fkPlaceId, int fkUserId, String name, Calendar date, Calendar time, String note) {
         setId(id);
         setFkPlaceId(fkPlaceId);
         setFkUserId(fkUserId);
@@ -102,7 +102,7 @@ public class Plan {
 
     // setter
 
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 

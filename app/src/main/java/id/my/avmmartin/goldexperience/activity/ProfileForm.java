@@ -75,7 +75,7 @@ abstract class ProfileForm extends AppCompatActivity {
             throw new EmptyEntryException(R.string.warning_gender_filled);
         }
 
-        return new User(-1, email, password, fullName, birthday, phone, userTypeVIP, sexMale);
+        return new User(email, password, fullName, birthday, phone, userTypeVIP, sexMale);
     }
 
     protected void loadData(User user) {
