@@ -83,8 +83,8 @@ public class DataManager {
 
     // user
 
-    public void updateUser(User user) {
-        databaseManager.getUserManager().updateUser(user);
+    public void updateUser(int userId, User user) {
+        databaseManager.getUserManager().updateUser(userId, user);
     }
 
     // constructor

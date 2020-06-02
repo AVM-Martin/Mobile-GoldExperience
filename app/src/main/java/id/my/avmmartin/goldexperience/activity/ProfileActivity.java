@@ -22,7 +22,7 @@ public class ProfileActivity extends ProfileForm {
 
     private void btnUpdateOnClick() {
         try {
-            mainApp.getDataManager().updateUser(super.getUserFromEntry());
+            mainApp.getDataManager().updateUser(user.getId(), super.getUserFromEntry());
 
             Toast.makeText(ProfileActivity.this, R.string.success_update, Toast.LENGTH_SHORT).show();
             finish();

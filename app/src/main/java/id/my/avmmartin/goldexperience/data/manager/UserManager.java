@@ -64,12 +64,12 @@ public class UserManager {
 
     }
 
-    public void updateUser(User user) {
+    public void updateUser(int userId, User user) {
         String whereClause = (
             ID + " = ?"
         );
         String[] whereArgs = {
-            Integer.toString(user.getId())
+            Integer.toString(userId)
         };
 
         db.update(TABLE_NAME, user.toContentValues(), whereClause, whereArgs);
