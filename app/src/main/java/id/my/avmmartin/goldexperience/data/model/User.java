@@ -67,7 +67,6 @@ public class User {
         String email, String password, String fullName,
         Calendar birthday, String phone, boolean userTypeVIP, boolean sexMale
     ) {
-        setId(id);
         setEmail(email);
         setPassword(password);
         setFullName(fullName);

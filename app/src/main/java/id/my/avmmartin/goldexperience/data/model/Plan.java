@@ -60,7 +60,6 @@ public class Plan {
     // constructor
 
     public Plan(int fkPlaceId, int fkUserId, String name, Calendar date, Calendar time, String note) {
-        setId(id);
         setFkPlaceId(fkPlaceId);
         setFkUserId(fkUserId);
 
