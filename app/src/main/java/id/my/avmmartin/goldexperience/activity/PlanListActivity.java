@@ -23,7 +23,6 @@ public class PlanListActivity extends AppCompatActivity implements DeletePlanDia
     // event activity
 
     public void planListAdapterBtnDeleteOnClick(Plan plan) {
-        // TODO: please check this item
         DeletePlanDialog dialog = new DeletePlanDialog();
         dialog.bindData(plan);
         dialog.show(getSupportFragmentManager(), "");

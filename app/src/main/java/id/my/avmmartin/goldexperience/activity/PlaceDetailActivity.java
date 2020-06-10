@@ -50,8 +50,6 @@ public class PlaceDetailActivity extends AppCompatActivity implements AddPlanDia
         Calendar time = dialog.getCalendar();
         String note = dialog.getEtNote().getText().toString();
 
-        // TODO: validate data
-
         int userId = mainApp.getDataManager().getAppUserId();
         Plan plan = new Plan(place.getId(), userId, name, date, time, note);
         mainApp.getDataManager().insertNewPlan(plan);
