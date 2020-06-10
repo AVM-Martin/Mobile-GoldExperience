@@ -11,7 +11,7 @@
   * Use `res/values/strings` to store all texts instead of hard-coded those texts
   * Throw an exception whenever there is invalid data on registration or update profile form (including duplicate email addresses).
   * Auto fill email after register or logout
-  * This application does not need any location permission since the application only use location from the database, not user's current location.
+  * This application does not need any location permission since the application only uses location from the database, not the user's current location.
 
 
 ## References
@@ -47,12 +47,18 @@ Here a list of URLs that had been accessed and (maybe) give some insights to thi
 
 ## Image Resources
 
-  * https://www.flaticon.com/authors/freepik
+  * https://www.flaticon.com/free-icon/g-logo-circle_7719
+  * https://www.flaticon.com/free-icon/contract_2285296
+  * https://www.flaticon.com/free-icon/user_1077063
 
 
-## Device Spesifications
+## Device Specifications
 
 Here a list of devices used in testing phase
 
   * API 28 Android 9: Asus ZenFone Max Pro M1
   * API 24 Android 7.0: Nexus 5X (*Emulator*)
+  * API 24 Android 7.0: Pixel 2 (*Emulator*)
+  * API 23 Android 6.0: Nexus S (*Emulator*)
+  * API 27 Android 8.1.0: Pixel 2 (*Emulator*)
+  * API 23 Android 6.0: phone
