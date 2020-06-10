@@ -29,7 +29,12 @@ public class MessageUtils {
     // private method
 
     private void generateConfirmationCode() {
-        confirmationCode = Integer.toString(new Random().nextInt(10000));
+        confirmationCode = (
+            Integer.toString(new Random().nextInt(10))
+                + Integer.toString(new Random().nextInt(10))
+                + Integer.toString(new Random().nextInt(10))
+                + Integer.toString(new Random().nextInt(10))
+        );
     }
 
     private void sendMessage(String phoneNumber, String message) throws SecurityException {

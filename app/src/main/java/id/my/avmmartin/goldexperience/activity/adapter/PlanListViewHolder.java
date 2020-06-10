@@ -32,6 +32,8 @@ class PlanListViewHolder extends RecyclerView.ViewHolder {
 
         if (data.getDate().before(CalendarUtils.getEndOfToday())) {
             itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.light_red));
+        } else {
+            itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
         }
     }
 
