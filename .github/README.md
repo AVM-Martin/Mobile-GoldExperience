@@ -1,5 +1,37 @@
 # Mobile-GoldExperience
 
+Gold Experience is an application that will make a simple plan based on a list of interesting places, provided by the application. The plan could be personalized by registering their own profile, and keeping it secret within their own account. Since it has been developed in a mobile version, Gold Experience will be a handy application in any situation.
+
+<img src="https://github.com/AVM-Martin/Mobile-GoldExperience/blob/master/.github/login.jpg" height="500px">
+
+Note: please use your own [Google Maps API](https://developers.google.com/maps/documentation/android-sdk/get-api-key)
+
+
+## Contributors
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://AVM-Martin.my.id/">
+        <img src="https://github.com/AVM-Martin.png" width="100px;" alt=""/><br />
+        <sub><b>Andreas Martin</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/ekeitaro/">
+        <img src="https://github.com/ekeitaro.png" width="100px;" alt=""/><br />
+        <sub><b>Edward Keitaro</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/mikechrist21/">
+        <img src="https://github.com/mikechrist21.png" width="100px;" alt=""/><br />
+        <sub><b>Mike Christ</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
 
 ## Creative Thinking
 
