@@ -1,0 +1,42 @@
+[
+	{
+		"id": 1,
+		"name": "The Palawan Island",
+		"description": "The largest island in the Palawan Province. Voted as the most beautiful island in the world several time.",
+		"rating": 4.7,
+		"LAT": 9.1684582,
+		"LNG": 118.1321269
+	},
+	{
+		"id": 2,
+		"name": "The island of Maui",
+		"description": "The island of Maui is the second-largest of the Hawaiian Islands. Maui’s diverse landscapes are the result of a unique combination of geology, topography, and climate.",
+		"rating": 4.0,
+		"LAT": 20.8032599,
+		"LNG": -156.4780668
+	},
+	{
+		"id": 3,
+		"name": "Plitvice Lakes National Park",
+		"description": "It voted the most beautiful national parks in the world",
+		"rating": 4.5,
+		"LAT": 44.8654004,
+		"LNG": 15.5798232
+	},
+	{
+		"id": 4,
+		"name": "Miami Beach",
+		"description": "Miami Beach is a coastal resort city in Miami-Dade County, Florida, United States. Best sites to visit in Miami Beach like South Beach and Art Deco Tour.",
+		"rating": 4.4,
+		"LAT": 25.8103146,
+		"LNG": -80.1751609
+	},
+	{
+		"id": 5,
+		"name": "Alberta",
+		"description": "Arguably, Alberta is one of the Canada’s most impressive scenery. The most scenic provinces in all of Canada is home to two of the oldest national parks in the world.",
+		"rating": 4.3,
+		"LAT": 54.4216981,
+		"LNG": -119.4838814
+	}
+]

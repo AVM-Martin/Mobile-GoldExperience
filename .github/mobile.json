@@ -1,0 +1,92 @@
+{
+  "places": [
+    {
+      "placeID": 1,
+      "placeName": "Colosseum",
+      "placeLatitude": 41.890346,
+      "placeLongitude": 12.492274,
+      "placeRating": 4.5,
+      "placeDescription": "The Colosseum is the main symbol of Rome. It is an imposing construction that, with almost 2,000 years of history, will bring you back in time to discover the way of life in the Roman Empire. The construction of the Colosseum began in the year 72 under the empire of Vespasian and was finished in the year 80 during the rule of the emperor Titus. After completion, the Colosseum became the greatest Roman amphitheatre, measuring 188 meters in length, 156 meters in width and 57 meters in height."
+    },
+    {
+      "placeID": 2,
+      "placeName": "Amalfi Coast",
+      "placeLatitude": 40.633546,
+      "placeLongitude": 14.6031,
+      "placeRating": 2.0,
+      "placeDescription": "One of the world's most famous road trips, the Amalfi Drive (aka SS163)is also arguably the most beautiful 48 kilometers of coastline in Italy,and certainly high on the list of Italy's top tourist attractions.Carved into cliffs that are already cut by deep ravines, the road clings high above the Tyrrhenian Sea in a series of breathtaking views and curvesbounded by almost vertical mountains rising on one side and long vertical drops on the other."
+    },
+    {
+      "placeID": 3,
+      "placeName": "Capri Island",
+      "placeLatitude": 40.554711,
+      "placeLongitude": 14.222476,
+      "placeRating": 1.5,
+      "placeDescription": "Capri island, just off the Amalfi Coast, is a famous destination in Italy, but somehow it’s really tricky to find a comprehensive guide to things to do on Capri. Everyone just tells you how amazing it is, without telling you where to go and what to see, or just mention a few most popular sights without showing what Capri is truly about."
+    },
+    {
+      "placeID": 4,
+      "placeName": "Leaning Tower of Pisa",
+      "placeLatitude": 43.722991,
+      "placeLongitude": 10.396597,
+      "placeRating": 5.0,
+      "placeDescription": "A fancy freestanding bell tower that leans precariously towards the ground is one of Italy's most famous tourist attractions. Known the world over, the Romanesque structure was designed to impress - and that it has done,  though not for the reasons the architect intended. Started in 1174,  the tower was built on a shallow foundation on sandy-clay soil. It already started to lean before the third level was completed.  Adjustments were made to try to compensate but it was deemed irreparable."
+    },
+    {
+      "placeID": 5,
+      "placeName": "Trevi Fountain",
+      "placeLatitude": 41.901025,
+      "placeLongitude": 12.483305,
+      "placeRating": 4.5,
+      "placeDescription": "The Trevi fountain is located right in the heart of Rome. The nearest metro stop is Barberini. If you enjoy walking you can take a beautiful route from Barberini which takes you to the Quirinale and to the Fountain, and from there to the Pantheon, then to Piazza Navona, ending up at Montecitorio and Via Condotti if you fancy a bit of shopping. You’ll love the atmosphere in this part of Rome!"
+    },
+    {
+      "placeID": 6,
+      "placeName": "Florence Cathedral",
+      "placeLatitude": 43.773176,
+      "placeLongitude": 11.255949,
+      "placeRating": 3.5,
+      "placeDescription": "Florence's cathedral stands tall over the city with its magnificent Renaissance dome designed by Filippo Brunelleschi, with the baptistery right across. The cathedral named in honor of Santa Maria del Fiore is a vast Gothic structure built on the site of the 7th century church of Santa Reparata, the remains of which can be seen in the crypt."
+    },
+    {
+      "placeID": 7,
+      "placeName": "Uffizi Gallery",
+      "placeLatitude": 43.767809,
+      "placeLongitude": 11.255311,
+      "placeRating": 1.5,
+      "placeDescription": "For art lovers, the Uffizi Gallery is the number-one attraction in Florence. More casual tourists, whether they see the gallery independently or on a guided tour,  will at least want to see its highlights, including its most famous work: Botticelli's Birth of Venus.  Apart from its size, perhaps the most mind boggling thing to know  before visiting the Uffizi Gallery is that this was a private collection of one family - and only part of it, at that. More priceless art is tucked away in their other palaces and villas."
+    },
+    {
+      "placeID": 8,
+      "placeName": "Lake Como",
+      "placeLatitude": 46.014924,
+      "placeLongitude": 9.258241,
+      "placeRating": 1.5,
+      "placeDescription": "There is hardly a place in Europe that evokes images of beauty, glamour and tranquility more than Lake Como in Italy. For hundreds of years it’s been a popular destination with the rich and famous but there are plenty of things to do at Lake Como for the humble tourist, too. Or, for your Italy honeymoon."
+    },
+    {
+      "placeID": 9,
+      "placeName": "Saint Mark's Basilica",
+      "placeLatitude": 45.434591,
+      "placeLongitude": 12.339712,
+      "placeRating": 3.0,
+      "placeDescription": "Originally the chapel of the Doge, St. Mark's Basilica (Basilica di San Marco) became important in 829, when the remains of St. Mark came to Venice from Alexandria and were interred here. The present ground-plan, derived from the Church of the Apostles at Constantinople, dates from 1063."
+    },
+    {
+      "placeID": 10,
+      "placeName": "Grand Canal",
+      "placeLatitude": 45.435424,
+      "placeLongitude": 12.32788,
+      "placeRating": 5.0,
+      "placeDescription": "The Grand Canal not only connects most of Venice's top tourist attractions, it is one of its top attractions. Curving in a reverse S through the heart of the city, it is also Venice's Main Street, always busy with traffic that includes everything from gondolas to barges carrying produce to market. In Venice's heyday, anyone of note - or who wanted to be of note - had to have a palace facing the Grand Canal, and their palazzi represent every style of architecture, from the 12th to the early 18th century."
+    },
+    {
+      "placeID": 11,
+      "placeName": "Pompeii",
+      "placeLatitude": 40.74533,
+      "placeLongitude": 14.499581,
+      "placeRating": 3.5,
+      "placeDescription": "The ruined city of Pompeii lies at the foot of Mount Vesuvius, the volcano whose eruption in AD 79 engulfed and subsequently encased the city in six meters of ash and pumice-stone. Excavated over several centuries, what we see today, together with the neighboring site of Herculaneum, gives the finest example anywhere of a Roman town and its way of life. It's easy to see why this is one of Italy's most popular attractions for tourists. Only 16 years before its destruction, Pompeii was badly damaged by an earthquake from which its population of 20,000 had not yet finished rebuilding. At the first sign of the eruption, people began leaving, so when the final flow descended like a tidal wave, only about 2,000 people remained trapped in the city."
+    }
+  ]
+}
