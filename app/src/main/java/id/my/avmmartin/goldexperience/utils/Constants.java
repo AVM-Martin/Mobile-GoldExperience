@@ -14,7 +14,7 @@ public class Constants {
     public static final int GUEST = -1;
 
     public static final String JSON_URL_PLACE =
-        "https://raw.githubusercontent.com/dnzrx/SLC-REPO/master/MOBI6021/E202-MOBI6021-MQ01-00.json";
+        "https://raw.githubusercontent.com/AVM-Martin/Mobile-GoldExperience/master/.github/mobile_2.json";
 
     public static final double GMAPS_ZOOM_LEVEL = 5.5;
 
